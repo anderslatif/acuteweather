@@ -1,7 +1,6 @@
 import './style.css';
 
 
-
 function computeFeelsLike({
 	temperatureC,
 	relativeHumidity,
