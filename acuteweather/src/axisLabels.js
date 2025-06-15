@@ -1,38 +1,39 @@
-export function generateFeelsLikeLabels({ feelsLikeC, dewPointC, solarRadiation }) {
-	const thermal = getThermalLabel(feelsLikeC);
-	const humidity = getHumidityLabel(dewPointC);
-	const sun = getSunLabel(solarRadiation);
+export function generateFeelsLikeLabels({ feelsLikeOutdoors, dewPoint, solarRadiation }) {
 
 	return {
-		thermal: { label: thermal.label, index: thermal.index },
-		humidity: { label: humidity.label, index: humidity.index },
-		sun: { label: sun.label, index: sun.index },
-		sentence: `It feels ${thermal.label} with ${humidity.label} humidity and ${sun.label} sunlight.`,
+		thermal: getClosestLabel(feelsLikeOutdoors	, [
+			{ label: "freezing", max: 5 },
+			{ label: "cold", max: 10 },
+			{ label: "cool", max: 16 },
+			{ label: "comfortable", max: 23 },
+			{ label: "warm", max: 28 },
+			{ label: "hot", max: 33 },
+			{ label: "sweltering", max: 45 },
+		]),
+		humidity: getClosestLabel(dewPoint, [
+			{ label: "dry", max: 10 },
+			{ label: "crisp", max: 15 },
+			{ label: "neutral", max: 18 },
+			{ label: "humid", max: 21 },
+			{ label: "muggy", max: 24 },
+			{ label: "sweaty mess", max: 30 },
+		]),
+		sun: getClosestLabel(solarRadiation, [
+			{ label: "overcast", max: 100 },
+			{ label: "filtered sun", max: 300 },
+			{ label: "sunny", max: 600 },
+			{ label: "blazing sun", max: 1200 },
+		]),
+		sentence: function () {
+			return `It feels <b>${this.thermal.label}</b> with ${this.humidity.label} humidity and ${this.sun.label} sunlight.`;
+		},
 	};
 }
 
-function getSunLabel(radiation) {
-	if (radiation < 100) return { label: "overcast", index: 0 };
-	if (radiation < 300) return { label: "filtered sun", index: 1 };
-	if (radiation < 600) return { label: "sunny", index: 2 };
-	return { label: "blazing sun", index: 3 };
-}
-
-function getHumidityLabel(dewPointC) {
-	if (dewPointC <= 10) return { label: "dry", index: 0 };
-	if (dewPointC <= 15) return { label: "crisp", index: 1 };
-	if (dewPointC <= 18) return { label: "neutral", index: 2 };
-	if (dewPointC <= 21) return { label: "humid", index: 3 };
-	if (dewPointC <= 24) return { label: "muggy", index: 4 };
-	return { label: "sweaty mess", index: 5 };
-}
-
-function getThermalLabel(feelsLikeC) {
-	if (feelsLikeC <= 5) return { label: "freezing", index: 0 };
-	if (feelsLikeC <= 10) return { label: "cold", index: 1 };
-	if (feelsLikeC <= 16) return { label: "cool", index: 2 };
-	if (feelsLikeC <= 23) return { label: "comfortable", index: 3 };
-	if (feelsLikeC <= 28) return { label: "warm", index: 4 };
-	if (feelsLikeC <= 33) return { label: "hot", index: 5 };
-	return { label: "sweltering", index: 6 };
+function getClosestLabel(value, ranges) {
+	for (let i = 0; i < ranges.length; i++) {
+		if (value <= ranges[i].max) {
+			return { label: ranges[i].label, index: i, value };
+		}
+	}
 }

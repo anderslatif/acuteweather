@@ -1,6 +1,9 @@
 /*******************************************/
-/* Logo */
+/* CSS Reset / Setup */
 /*******************************************/
+h1, h2, h3, h4, h5, h6 {
+	margin: 0.4rem 0;
+}
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -17,12 +20,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 /*******************************************/
 /* Logo */
 /*******************************************/
 
 #acuteweather-logo {
-  width: 8vw;
+  width: 6vw;
   animation: squigglevision 0.4s linear infinite;
 }
 
@@ -38,6 +45,33 @@
 /* Weather Widget */
 /*******************************************/
 
+#acuteweather-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	box-sizing: border-box;
+}
+
+#acute-weather-info-wrapper {
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.feels-like-emoji {
+	font-size: 1.4rem;
+	line-height: 1;
+	vertical-align: middle;
+}
+
+#open-meteo-link {
+  color: grey;
+}
 
 /*******************************************/
 /* Formulas */
@@ -49,13 +83,8 @@
 /* Axes */
 /*******************************************/
 
-
-#axes-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 800px;
-  margin: auto;
+#acuteweather-axes-wrapper {
+  padding: 2vw;
 }
 
 .axis {
@@ -79,7 +108,7 @@
   height: 12px;
   border-radius: 6px;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Allow tooltip to be visible outside bar */
   margin-bottom: 0.5rem;
 }
 
@@ -99,6 +128,7 @@
   height: 100%;
   width: 0%;
   transition: width 0.3s;
+  position: relative; /* Required for tooltip positioning */
 }
 
 .labels {
@@ -106,6 +136,25 @@
   justify-content: space-between;
   font-size: 0.9rem;
 }
+
+.tooltip {
+  position: absolute;
+  right: 0;
+  top: -1.5rem;
+  font-size: 0.8rem;
+  background: rgba(0, 0, 0, 0.80);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+}
+
+
+/*******************************************/
+/* Media Queries */
+/*******************************************/
 
 @media (max-width: 600px) {
   body {

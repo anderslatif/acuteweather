@@ -41,12 +41,16 @@
     <div id="acute-weather-info-wrapper" style="display: none;">
 
       <div id="acuteweather-wrapper">
-        <h4>Current temperature (actual 🌡️):</h4>
+        
+        <h4>Current temperature (actual <span class="feels-like-emoji">🌡️</span>):</h4>
         <h2 id="acuteweather-temperature-actual"></h2>
-        <h4>Feels like (outdoors 🏞️):</h4>
+        <a href="https://open-meteo.com/" id="open-meteo-link">Source</a>
+
+        <h4>Feels like (outdoors <span class="feels-like-emoji">🏞️</span>):</h4>
         <h2 id="acuteweather-temperature-outdoors"></h2>
         <h2 id="acuteweather-formula-outdoors"></h2>
-        <h4>Feels like (indoors 🏠):</h4>
+        
+        <h4>Feels like (indoors <span class="feels-like-emoji">🏠</span>):</h4>
         <h2 id="acuteweather-temperature-indoors"></h2>
         <h2 id="acuteweather-formula-indoors"></h2>
 
@@ -56,6 +60,7 @@
 
       <div id="acuteweather-axes-wrapper">
         <div class="axis" data-axis="thermal">
+          <label>Feels like (outdoors)</label>
           <div class="emoji-row">
             <div>🥶</div><div>🧊</div><div>🆒</div><div>🙂</div><div>🌤️</div><div>🔥</div><div>🌋</div>
           </div>
@@ -67,6 +72,7 @@
           </div>
         </div>
         <div class="axis" data-axis="humidity">
+          <label>Humidity (dew Point)</label>
           <div class="emoji-row">
             <div>🏜️</div><div>🍂</div><div>😌</div><div>💧</div><div>😶‍🌫️</div><div>💦</div>
           </div>
@@ -78,6 +84,7 @@
           </div>
         </div>
         <div class="axis" data-axis="sun">
+          <label>Solar Radiation (cloudiness)</label>
           <div class="emoji-row">
             <div>☁️</div><div>🌥️</div><div>🌤️</div><div>☀️</div>
           </div>

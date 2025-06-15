@@ -17,26 +17,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       elevation: 10,
   };
 
-  /*
-  let weatherInfo = await getWeatherInfo(location);
-  console.log('Weather Info:', weatherInfo);
+  
+  // let weatherInfo = await getWeatherInfo(location);
+  // console.log('Weather Info:', weatherInfo);
 
-  const feelsLike = computeFeelsLike(weatherInfo);;
-  console.log('Feels Like Temperature:', feelsLike);
+  // const feelsLike = computeFeelsLike(weatherInfo);;
+  // console.log('Feels Like Temperature:', feelsLike);
 
-  weatherInfo = { ...weatherInfo, ...feelsLike};
-  */
-
+  // weatherInfo = { ...weatherInfo, ...feelsLike};
+ 
   const weatherInfo = { 
     temperatureC: 20,
-    feelsLikeOutdoors: 18,
+    feelsLikeOutdoors: 19,
     feelsLikeIndoors: 22,
-    feelsLikeC: 19,
-    dewPointC: 15,
+    feelsLikeC: 29,
+    dewPoint: 15,
     solarRadiation: 200,
     location: location
   };
   
+
   const labelInfo = generateFeelsLikeLabels(weatherInfo);
   
   displayWeatherWidget(weatherInfo, labelInfo)
