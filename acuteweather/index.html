@@ -38,22 +38,29 @@
 
     </nav>
 
-    <div id="acuteweather-wrapper">
-      <h2 id="acuteweather-temperature"></h2>
-      <h2 id="acuteweather-label"></h2>
+    <div id="acute-weather-info-wrapper" style="display: none;">
+
+      <div id="acuteweather-wrapper">
+        <h4>Current temperature (actual 🌡️):</h4>
+        <h2 id="acuteweather-temperature-actual"></h2>
+        <h4>Feels like (outdoors 🏞️):</h4>
+        <h2 id="acuteweather-temperature-outdoors"></h2>
+        <h2 id="acuteweather-formula-outdoors"></h2>
+        <h4>Feels like (indoors 🏠):</h4>
+        <h2 id="acuteweather-temperature-indoors"></h2>
+        <h2 id="acuteweather-formula-indoors"></h2>
+
+        <h3 id="acuteweather-label"></h3>
+      </div>
+
+
+      <div id="acuteweather-axes-wrapper">
+        <div id="axis-thermal-wrapper">
+        <div id="axis-humidity-discomfort-wrapper">
+        <div id="axis-sun-exposure-wrapper">
+      </div>
     </div>
 
-    <div id="formula-wrapper"></div>
-
-    <div id="axis-thermal-wrapper">
-
-    </div>
-    <div id="axis-humidity-discomfort-wrapper">
-
-    </div>
-    <div id="axis-sun-exposure-wrapper">
-
-    </div>
 
     <script type="module" src="/src/main.js"></script>
   </body>
