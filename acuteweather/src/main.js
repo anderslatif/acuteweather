@@ -2,6 +2,7 @@ import './style.css';
 import { getLocation } from './location.js';
 import { getWeatherInfo } from './weatherAPI.js';
 import { computeFeelsLike } from './feelslike.js';
+import { generateFeelsLikeLabels } from './axisLabels.js';
 import { displayWeatherWidget } from './domHandlers.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       elevation: 10,
   };
 
+  /*
   let weatherInfo = await getWeatherInfo(location);
   console.log('Weather Info:', weatherInfo);
 
@@ -23,8 +25,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   console.log('Feels Like Temperature:', feelsLike);
 
   weatherInfo = { ...weatherInfo, ...feelsLike};
+  */
 
-  const labelInfo = "//todo"
+  const weatherInfo = { 
+    temperatureC: 20,
+    feelsLikeOutdoors: 18,
+    feelsLikeIndoors: 22,
+    feelsLikeC: 19,
+    dewPointC: 15,
+    solarRadiation: 200,
+    location: location
+  };
+  
+  const labelInfo = generateFeelsLikeLabels(weatherInfo);
   
   displayWeatherWidget(weatherInfo, labelInfo)
 });

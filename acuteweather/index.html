@@ -50,14 +50,44 @@
         <h2 id="acuteweather-temperature-indoors"></h2>
         <h2 id="acuteweather-formula-indoors"></h2>
 
-        <h3 id="acuteweather-label"></h3>
+        <h3 id="acuteweather-label-sentence"></h3>
       </div>
 
 
       <div id="acuteweather-axes-wrapper">
-        <div id="axis-thermal-wrapper">
-        <div id="axis-humidity-discomfort-wrapper">
-        <div id="axis-sun-exposure-wrapper">
+        <div class="axis" data-axis="thermal">
+          <div class="emoji-row">
+            <div>🥶</div><div>🧊</div><div>🆒</div><div>🙂</div><div>🌤️</div><div>🔥</div><div>🌋</div>
+          </div>
+          <div class="bar">
+            <div class="fill" id="thermal-fill"></div>
+          </div>
+          <div class="labels">
+            <div>freezing</div><div>cold</div><div>cool</div><div>comfortable</div><div>warm</div><div>hot</div><div>sweltering</div>
+          </div>
+        </div>
+        <div class="axis" data-axis="humidity">
+          <div class="emoji-row">
+            <div>🏜️</div><div>🍂</div><div>😌</div><div>💧</div><div>😶‍🌫️</div><div>💦</div>
+          </div>
+          <div class="bar">
+            <div class="fill" id="humidity-fill"></div>
+          </div>
+          <div class="labels">
+            <div>dry</div><div>crisp</div><div>neutral</div><div>humid</div><div>muggy</div><div>sweaty mess</div>
+          </div>
+        </div>
+        <div class="axis" data-axis="sun">
+          <div class="emoji-row">
+            <div>☁️</div><div>🌥️</div><div>🌤️</div><div>☀️</div>
+          </div>
+          <div class="bar">
+            <div class="fill" id="sun-fill"></div>
+          </div>
+          <div class="labels">
+            <div>overcast</div><div>filtered sun</div><div>sunny</div><div>blazing sun</div>
+          </div>
+        </div>
       </div>
     </div>
 

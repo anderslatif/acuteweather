@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/acuteweather_logo.png" />
+
+    <style>
+  	body {
+  		font-family: sans-serif;
+  		background: #f9f9f9;
+  		color: #333;
+  		padding: 2rem;
+  	}
+
+  	#axes-container {
+  		display: flex;
+  		flex-direction: column;
+  		gap: 2rem;
+  		max-width: 800px;
+  		margin: auto;
+  	}
+
+  	.axis {
+  		text-align: center;
+  	}
+
+  	.emoji-row {
+  		display: flex;
+  		justify-content: space-between;
+  		font-size: 1.5rem;
+  		margin-bottom: 0.25rem;
+  	}
+
+  	.emoji-row div, .labels div {
+  		text-align: left;
+  		flex: 1;
+  	}
+
+  	.bar {
+  		background: #ddd;
+  		height: 12px;
+  		border-radius: 6px;
+  		position: relative;
+  		overflow: hidden;
+  		margin-bottom: 0.5rem;
+  	}
+
+  	#thermal-fill {
+  		background: linear-gradient(to right, #4a90e2, red);
+  	}
+
+  	#humidity-fill {
+  		background: linear-gradient(to right, orange, #4a90e2);
+  	}
+
+  	#sun-fill {
+  		background: linear-gradient(to right, #ccc, gold);
+  	}
+
+  	.fill {
+  		height: 100%;
+  		width: 0%;
+  		transition: width 0.3s;
+  	}
+
+  	.labels {
+  		display: flex;
+  		justify-content: space-between;
+  		font-size: 0.9rem;
+  		color: #666;
+  	}
+
+  	@media (max-width: 600px) {
+  		body {
+  			font-size: 0.9rem;
+  		}
+  		.emoji-row {
+  			font-size: 1.2rem;
+  		}
+  		.labels {
+  			font-size: 0.5rem;
+  		}
+  	}
+  </style>
+
+
+  <title>Document</title>
+</head>
+<body>
+  <div id="axes-container">
+  	<div class="axis" data-axis="thermal">
+  		<div class="emoji-row">
+  			<div>🥶</div><div>🧊</div><div>🆒</div><div>🙂</div><div>🌤️</div><div>🔥</div><div>🌋</div>
+  		</div>
+  		<div class="bar">
+  			<div class="fill" id="thermal-fill"></div>
+  		</div>
+  		<div class="labels">
+  			<div>freezing</div><div>cold</div><div>cool</div><div>comfortable</div><div>warm</div><div>hot</div><div>sweltering</div>
+  		</div>
+  	</div>
+  	<div class="axis" data-axis="humidity">
+  		<div class="emoji-row">
+  			<div>🏜️</div><div>🍂</div><div>😌</div><div>💧</div><div>😶‍🌫️</div><div>💦</div>
+  		</div>
+  		<div class="bar">
+  			<div class="fill" id="humidity-fill"></div>
+  		</div>
+  		<div class="labels">
+  			<div>dry</div><div>crisp</div><div>neutral</div><div>humid</div><div>muggy</div><div>sweaty mess</div>
+  		</div>
+  	</div>
+  	<div class="axis" data-axis="sun">
+  		<div class="emoji-row">
+  			<div>☁️</div><div>🌥️</div><div>🌤️</div><div>☀️</div>
+  		</div>
+  		<div class="bar">
+  			<div class="fill" id="sun-fill"></div>
+  		</div>
+  		<div class="labels">
+  			<div>overcast</div><div>filtered sun</div><div>sunny</div><div>blazing sun</div>
+  		</div>
+  	</div>
+  </div>
+
+
+  <script>
+  	function setAxisValue(axis, index, max) {
+  		const fill = document.getElementById(axis + "-fill");
+  		const percentage = (index + 1) / max * 100;
+  		fill.style.width = percentage + "%";
+  	}
+
+  	setAxisValue("thermal", 4, 7);  // value 5/7
+  	setAxisValue("humidity", 2, 6); // value 3/6
+  	setAxisValue("sun", 1, 4);      // value 2/4
+  </script>
+</body>
+</html>
