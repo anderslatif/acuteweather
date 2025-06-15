@@ -7,24 +7,29 @@ import { generateFeelsLikeLabels } from './axisLabels.js';
 import { displayWeatherWidget } from './domHandlers.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const location = await getLocation();
-  
-  let weatherInfo = await getWeatherInfo(location);
-  console.log('Weather Info:', weatherInfo);
+    const location = await getLocation();
 
-  const feelsLike = computeFeelsLike(weatherInfo);;
-  weatherInfo = { ...weatherInfo, ...feelsLike };
-  console.log('Feels Like Temperature:', feelsLike);  
-  
+    let weatherInfo = await getWeatherInfo(location);
+    console.log('Weather Info:', weatherInfo);
 
-  const labelInfo = generateFeelsLikeLabels(weatherInfo);
-  console.log('Label Info:', labelInfo);
-  
-  displayWeatherWidget(weatherInfo, labelInfo)
+    if (!weatherInfo.temperatureC) {
+        alert("The weather API returned a valid response but without the necessary data.");
+        return;
+    }
+
+    const feelsLike = computeFeelsLike(weatherInfo);;
+    weatherInfo = { ...weatherInfo, ...feelsLike };
+    console.log('Feels Like Temperature:', feelsLike);  
+
+
+    const labelInfo = generateFeelsLikeLabels(weatherInfo);
+    console.log('Label Info:', labelInfo);
+
+    displayWeatherWidget(weatherInfo, labelInfo);
 });
 
 
-document.querySelectorAll('.formula-box').forEach(box => {
+document.querySelectorAll('.formula-box').forEach((box) => {
     const toggle = box.querySelector('.formula-toggle');
     box.addEventListener('click', () => {
         box.classList.toggle('collapsed');
