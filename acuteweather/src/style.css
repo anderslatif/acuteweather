@@ -73,11 +73,84 @@ body {
   color: grey;
 }
 
+
 /*******************************************/
 /* Formulas */
 /*******************************************/
 
+.formula-box {
+  background: #2a2a2a;
+  color: #f2f2f2;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  width: 50vw;
+}
+.formula-box.collapsed .formula-content {
+	display: none;
+}
+.formula-toggle {
+	cursor: pointer;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	display: inline-block;
+}
+.formula-box code {
+  background: #111;
+  color: #fafafa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+}
+.formula-box ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+}
+.formula-box li {
+  display: flex;
+  gap: 0.5rem;
+}
+.formula-box li {
+  margin-bottom: 0.3rem;
+}
+.formula-explanation {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+.param-label {
+  min-width: 2rem;
+}
+.param-arrow {
+  width: 1rem;
+  text-align: center;
+}
+.param-value {
+  flex: 1;
+}
+.formula-link {
+	color: #0af;
+	display: inline;
+	margin-left: 0.25rem;
+	white-space: nowrap;
+}
+.param-T { color: #ff4444; }
+.param-RH { color: #44ff44; }
+.param-v { color: #4488ff; }
+.param-R { color: #ffee44; }
+.param-P { color: #44ffff; }
+.param-e { color: #ff44ff; }
+.param-AT { color: #b5651d; }
 
+.param-const {
+      color: #fc0;
+}
+.formula-line {
+	white-space: normal;
+	word-break: break-word;
+	line-height: 1.4;
+}
 
 /*******************************************/
 /* Axes */
@@ -167,3 +240,4 @@ body {
     font-size: 0.5rem;
   }
 }
+

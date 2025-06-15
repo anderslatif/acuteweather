@@ -38,21 +38,59 @@
 
     </nav>
 
+
+    <span id="loader"></span>
+
     <div id="acute-weather-info-wrapper" style="display: none;">
 
       <div id="acuteweather-wrapper">
         
         <h4>Current temperature (actual <span class="feels-like-emoji">🌡️</span>):</h4>
-        <h2 id="acuteweather-temperature-actual"></h2>
+        <div class="temperature-box bordered"><div id="acuteweather-temperature-actual" class="temperature-label">Actual Temperature</div></div>
+
         <a href="https://open-meteo.com/" id="open-meteo-link">Source</a>
 
         <h4>Feels like (outdoors <span class="feels-like-emoji">🏞️</span>):</h4>
-        <h2 id="acuteweather-temperature-outdoors"></h2>
-        <h2 id="acuteweather-formula-outdoors"></h2>
-        
+        <div class="temperature-box rainbow-box"><div id="acuteweather-temperature-outdoors" class="temperature-label">Temperature Outdoors</div></div>
+
+        <div id="acuteweather-formula-outdoors" class="formula-box collapsed">
+          <div class="formula-toggle">Click for the formula 🧮</div>
+          <div class="formula-content">
+            <code class="formula-line"><span class="param-e">e</span> (vapor pressure hPa) = (<span class="param-RH">RH</span> / 100) × 6.105 × exp((17.27 × <span class="param-T">T</span>) / (237.7 + <span class="param-T">T</span>)) = <span id="vapor-pressure-value"></span></code>
+            <p class="formula-explanation">
+                This calculates the 
+                <a class="formula-link" href="https://en.wikipedia.org/wiki/Apparent_temperature#Australian_apparent_temperature" target="_blank">
+                vapor pressure <code>e</code></a>in hPa, based on temperature and humidity.
+            </p>
+
+            <code id="at-formula" class="formula-line"><span class="param-AT">AT</span> (Apparent Temperature) = <span class="param-T">T</span> + <span class="param-const">0.33</span> × <span class="param-e">e</span> − <span class="param-const">0.70</span> × <span class="param-v">wind</span> − <span class="param-const">4.00</span> = <span id="at-value"></span></code>
+            <p class="formula-explanation">0.33 boosts humidity’s warmth effect, 0.70 scales wind’s cooling, and 4.00 adjusts the baseline.</p>
+            <p class="formula-explanation">They are calibration constants based on the <a class="formula-link" href="https://en.wikipedia.org/wiki/Apparent_temperature#Australian_apparent_temperature" target="_blank">Apparent Temperature formula</a>.</p>
+
+            <code class="formula-line">FeelsLike = <span class="param-AT">AT</span> + <span class="param-R">R</span> contribution − <span class="param-P">P</span> contribution = <span id="outdoor-feelslike-value"></span></code>
+            <p class="formula-explanation">My formula additionally takes solar radiation (<span class="param-R">R</span>) and precipitation (<span class="param-P">P</span>) into account.</p>
+
+            <p id="outdoor-result"></p>
+            <ul id="outdoor-params"></ul>
+          </div>
+        </div>
+
+
+
         <h4>Feels like (indoors <span class="feels-like-emoji">🏠</span>):</h4>
-        <h2 id="acuteweather-temperature-indoors"></h2>
+        <div class="temperature-box grayscale"><div id="acuteweather-temperature-indoors" class="temperature-label">Temperature Indoors</div></div>
         <h2 id="acuteweather-formula-indoors"></h2>
+        <div id="acuteweather-formula-indoors" class="formula-box collapsed">
+          <div class="formula-toggle">Click for the formula 🧮</div>
+          <div class="formula-content">
+            <p><code>FeelsLike = <span class="param-T">T</span> + <span class="param-const">0.33</span> × vaporPressure − <span class="param-const">4.00</span> = <span id="indoor-feelslike-value"></span></code></p>
+            <p class="formula-explanation">This uses the same formula as outdoors, but with wind, sun, and rain being set to zero indoors.</p>
+            <p id="indoor-result"></p>
+            <ul id="indoor-params"></ul>
+          </div>
+        </div>
+
+
 
         <h3 id="acuteweather-label-sentence"></h3>
       </div>
@@ -72,7 +110,7 @@
           </div>
         </div>
         <div class="axis" data-axis="humidity">
-          <label>Humidity (dew Point)</label>
+          <label>Humidity (dew point)</label>
           <div class="emoji-row">
             <div>🏜️</div><div>🍂</div><div>😌</div><div>💧</div><div>😶‍🌫️</div><div>💦</div>
           </div>
