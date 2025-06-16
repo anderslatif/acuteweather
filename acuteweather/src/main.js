@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 document.querySelectorAll('.formula-box').forEach((box) => {
     const toggle = box.querySelector('.formula-toggle');
-    box.addEventListener('click', () => {
+    box.addEventListener('dblclick', () => {
         box.classList.toggle('collapsed');
     });
-    toggle.addEventListener('click', event => {
+    toggle.addEventListener('dblclick', event => {
         event.stopPropagation();
         box.classList.toggle('collapsed');
     });
