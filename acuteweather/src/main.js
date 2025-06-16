@@ -1,6 +1,5 @@
 import './style.css';
 import './animations.css';
-import { getUserGestureIfNeeded } from './iOS.js';
 import { getLocation } from './location.js';
 import { getWeatherInfo } from './weatherAPI.js';
 import { computeFeelsLike } from './feelslike.js';
@@ -8,8 +7,6 @@ import { generateFeelsLikeLabels } from './axisLabels.js';
 import { displayWeatherWidget } from './domHandlers.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    await getUserGestureIfNeeded();
-
     const location = await getLocation();
 
     let weatherInfo = await getWeatherInfo(location);
