@@ -2,9 +2,9 @@ export function displayWeatherWidget(weatherInfo, labelInfo) {
 	updateWeatherInfo(weatherInfo, labelInfo, labelInfo);
 	displayFeelsLikeFormulas(weatherInfo);
 
-    updateAxesValue("thermal", labelInfo.thermal.value, -10, 40);
+    updateAxesValue("thermal", labelInfo.thermal.value, 0, 45);
 	updateAxesValue("humidity", labelInfo.humidity.value, 0, 30);
-	updateAxesValue("sun", labelInfo.sun.value, 0, 800);
+	updateAxesValue("sun", labelInfo.sun.value, 0, 1200);
 
 	document.getElementById("loader").remove();
 	document.getElementById("acute-weather-info-wrapper").style.display = "block";
