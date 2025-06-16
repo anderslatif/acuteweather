@@ -13,19 +13,19 @@ export function generateFeelsLikeLabels({ feelsLikeOutdoors, dewPoint, solarRadi
 		humidity: getClosestLabel(dewPoint, [
 			{ label: "dry", max: 10 },
 			{ label: "crisp", max: 15 },
-			{ label: "neutral", max: 18 },
+			{ label: "mild", max: 18 },
 			{ label: "humid", max: 21 },
 			{ label: "muggy", max: 24 },
-			{ label: "sweaty mess", max: 30 },
+			{ label: "oppressive", max: 30 },
 		]),
 		sun: getClosestLabel(solarRadiation, [
 			{ label: "overcast", max: 100 },
-			{ label: "filtered sun", max: 300 },
-			{ label: "sunny", max: 600 },
-			{ label: "blazing sun", max: 1200 },
+			{ label: "dim", max: 300 },
+			{ label: "bright", max: 600 },
+			{ label: "blazing", max: 1200 },
 		]),
 		sentence: function () {
-			return `It feels <b>${this.thermal.label}</b> with <b>${this.humidity.label}</b> humidity and <b>${this.sun.label}</b> sunlight.`;
+			return `It feels <b>${this.thermal.label}</b>, <b>${this.humidity.label}</b>, and <b>${this.sun.label}</b>.`;
 		},
 	};
 }
