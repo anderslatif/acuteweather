@@ -15,7 +15,7 @@ function updateWeatherInfo(weatherInfo, labelInfo) {
 	document.getElementById("acuteweather-temperature-outdoors").textContent = `${weatherInfo.feelsLikeOutdoors}°C`;
 	document.getElementById("acuteweather-temperature-indoors").textContent = `${weatherInfo.feelsLikeIndoors}°C`;
 
-	document.getElementById("acuteweather-label-sentence").innerHTML =  labelInfo.sentence();
+	document.getElementById("acuteweather-label-sentence").innerHTML =  labelInfo.getSentence();
 }
 
 function displayFeelsLikeFormulas(feelsLike) {

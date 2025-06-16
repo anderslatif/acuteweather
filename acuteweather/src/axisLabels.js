@@ -24,7 +24,7 @@ export function generateFeelsLikeLabels({ feelsLikeOutdoors, dewPoint, solarRadi
 			{ label: "bright", max: 600 },
 			{ label: "blazing", max: 1200 },
 		]),
-		sentence: function () {
+		getSentence: function () {
 			return `It feels <b>${this.thermal.label}</b>, <b>${this.humidity.label}</b>, and <b>${this.sun.label}</b>.`;
 		},
 	};
