@@ -6,10 +6,13 @@ import { computeFeelsLike } from './feelslike.js';
 import { generateFeelsLikeLabels } from './axisLabels.js';
 import { displayWeatherWidget } from './domHandlers.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const location = await getLocation();
+let weatherInfo;
+let location; 
 
-    let weatherInfo = await getWeatherInfo(location);
+document.addEventListener('DOMContentLoaded', async () => {
+    location = await getLocation();
+
+    weatherInfo = await getWeatherInfo(location);
     console.log('Weather Info:', weatherInfo);
 
     if (!weatherInfo.temperatureC) {
@@ -17,6 +20,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    updateWeatherDisplay();
+});
+
+function updateWeatherDisplay() {
     const feelsLike = computeFeelsLike(weatherInfo);;
     weatherInfo = { ...weatherInfo, ...feelsLike };
     console.log('Feels Like Temperature:', feelsLike);  
@@ -26,8 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('Label Info:', labelInfo);
 
     displayWeatherWidget(weatherInfo, labelInfo);
-});
-
+}
 
 document.querySelectorAll('.formula-box').forEach((box) => {
     const toggle = box.querySelector('.formula-toggle');
@@ -39,3 +45,17 @@ document.querySelectorAll('.formula-box').forEach((box) => {
         box.classList.toggle('collapsed');
     });
 });
+
+setInterval(async () => {
+    const newWeatherInfo = await getWeatherInfo(location);
+    if (newWeatherInfo.temperatureC !== weatherInfo.temperatureC ||
+        newWeatherInfo.relativeHumidity !== weatherInfo.relativeHumidity ||
+        newWeatherInfo.windSpeedMps !== weatherInfo.windSpeedMps ||
+        newWeatherInfo.solarRadiation !== weatherInfo.solarRadiation ||
+        newWeatherInfo.precipitationMmPerHr !== weatherInfo.precipitationMmPerHr) {
+    
+        updateWeatherDisplay();
+
+    }
+
+}, 10 * 60 * 1000);

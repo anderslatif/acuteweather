@@ -6,7 +6,7 @@ export function displayWeatherWidget(weatherInfo, labelInfo) {
 	updateAxesValue("humidity", labelInfo.humidity.value, 0, 30);
 	updateAxesValue("sun", labelInfo.sun.value, 0, 1200);
 
-	document.getElementById("loader").remove();
+	document.getElementById("loader")?.remove();
 	document.getElementById("acute-weather-info-wrapper").style.display = "block";
 }
 
@@ -22,6 +22,9 @@ function displayFeelsLikeFormulas(feelsLike) {
 
 	const outdoorParams = document.getElementById("outdoor-params");
 	const indoorParams = document.getElementById("indoor-params");
+
+	outdoorParams.innerHTML = "";
+	indoorParams.innerHTML = "";
 
 	[
 		["T", `${feelsLike.T} ← air temperature (°C)`],

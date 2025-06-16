@@ -68,6 +68,8 @@
                     </div>
                 </div>
 
+                <h3 id="acuteweather-label-sentence"></h3>
+
                 <div id="acuteweather-formula-outdoors" class="formula-box collapsed">
                     <div class="formula-toggle">
                         Double click for the formula 🧮
@@ -100,7 +102,7 @@
                         </code>
                         <p class="formula-explanation">
                             <span id="sun-boost-value"></span>The sunBoost function applies a diminishing return to radiation using log scaling, capped at 3°C. 
-                            <br><br><strong>Intuition:</strong> Sunlight increases warmth perception, but the effect levels off - bright sun adds a lot, but more brightness doesn’t keep increasing the warmth perception.
+                            <br><br><strong>Intuition:</strong> Sunlight increases warmth perception by a lot until a certain point where more sun light doesn’t keep increasing the warmth perception.
                         </p>
 
                         <code class="formula-line">
@@ -156,12 +158,11 @@
                     </div>
                 </div>
 
-                <h3 id="acuteweather-label-sentence"></h3>
             </div>
 
             <div id="acuteweather-axes-wrapper">
                 <div class="axis" data-axis="thermal">
-                    <label>Feels like (outdoors)</label>
+                    <label class="axis-label">Feels like (outdoors)</label>
                     <div class="emoji-row">
                         <div>🥶</div>
                         <div>🧊</div>
@@ -186,7 +187,7 @@
                 </div>
 
                 <div class="axis" data-axis="humidity">
-                    <label>Humidity (dew point)</label>
+                    <label class="axis-label">Humidity (dew point)</label>
                     <div class="emoji-row">
                         <div>🏜️</div>
                         <div>🍂</div>
@@ -209,7 +210,7 @@
                 </div>
 
                 <div class="axis" data-axis="sun">
-                    <label>Solar Radiation (cloudiness)</label>
+                    <label class="axis-label">Solar Radiation (cloudiness)</label>
                     <div class="emoji-row">
                         <div>☁️</div>
                         <div>🌥️</div>

@@ -178,8 +178,14 @@ body {
   padding: 2vw;
 }
 
+.axis-label {
+ color: grey;
+ font-weight: bold;
+}
+
 .axis {
   text-align: center;
+  padding-top: 2rem;
 }
 
 .emoji-row {
