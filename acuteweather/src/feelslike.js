@@ -25,12 +25,12 @@ export function computeFeelsLike({
 
 	const sunBoostOutdoor = Math.min(6, (R / 100)) * dayMultiplier;
 	const rainPenaltyOutdoor = Math.min(1.5, P * 0.3);
-	const windChill = (T <= 10 && v >= 1.3)
+	const useWindChill = (T <= 10 && v >= 1.3);
+	const windChill = useWindChill
 		? 13.12 + 0.6215 * T - 11.37 * Math.pow(v, 0.16) + 0.3965 * T * Math.pow(v, 0.16)
-		: null;
+		: 0;
 	const baseOutdoors = T + 0.33 * vaporPressure - 0.7 * v - 4;
-	const feelsLikeOutdoorsPrecise = (windChill !== null ? windChill : baseOutdoors)
-		+ sunBoostOutdoor - rainPenaltyOutdoor - dewPenalty - humidityDiscomfort;
+	const feelsLikeOutdoorsPrecise = useWindChill ? windChill : baseOutdoors;
 	const feelsLikeOutdoors = feelsLikeOutdoorsPrecise.toFixed(1);
 
 	const sunBoostIndoor = R * 0.1 * dayMultiplier;

@@ -90,7 +90,7 @@
                                 vapor pressure
                             </a>
                             <code class="param-e">e</code> in hPa, using temperature and relative humidity.
-                            It represents how much water vapor is present in the air, which influences how effectively the body can cool itself through sweat evaporation.
+                            It represents how much water vapor is present in the air and influences both apparent temperature and dew point-related discomfort.
                         </p>
 
                         <code id="at-formula" class="formula-line">
@@ -99,11 +99,11 @@
                         <br>
 
                         <p class="formula-explanation">
-                        	The <code class="param-AT">Apparent Temperature</code> is a baseline measure of perceived temperature.
-                        	It combines air temperature, vapor pressure and wind speed:
-                        	<code><span class="param-magic-number">0.33</span> × <span class="param-e">e</span></code> adds warmth from humidity,
-                        	<code><span class="param-magic-number">−0.70</span> × <span class="param-v">v</span></code> subtracts cooling from wind and
-                        	<code><span class="param-magic-number">−4.00</span></code> is a constant calibration offset.
+                            The Apparent Temperature serves as the baseline for calculating both outdoor and indoor perceived temperatures.
+                            It combines air temperature, vapor pressure and wind speed:
+                            <code><span class="param-magic-number">0.33</span> × <span class="param-e">e</span></code> adds warmth from humidity,
+                            <code><span class="param-magic-number">−0.70</span> × <span class="param-v">v</span></code> subtracts cooling from wind and
+                            <code><span class="param-magic-number">−4.00</span></code> is a constant calibration offset.
                         </p>
 
                         <code class="formula-line">
@@ -133,6 +133,7 @@
                             <span id="dew-penalty-value" class="param-dewPenalty"></span>
                             The <code class="param-dewPenalty">dewPointPenalty</code> reflects how saturated the air is, based on the absolute dew point temperature <code class="param-D">D</code>. When <code class="param-D">D</code> rises above <span class="param-magic-number">16</span> °C, sweat evaporation becomes less efficient and the air feels more oppressive. This penalty only activates in warm, humid conditions and always subtracts from the perceived temperature. See more on
                             <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>.
+                            The result is measured in °C.
                         </p>
 
                         <code class="formula-line">
@@ -151,18 +152,19 @@
                             <a href="https://en.wikipedia.org/wiki/Humidity#Human_comfort" class="formula-link" target="_blank">comfort range of
                             <span class="param-magic-number">30</span>–<span class="param-magic-number">60</span>%</a>.
                             When <code class="param-RH">RH</code> is below the range, the air feels cooler and drier due to increased evaporation. When it's above, the air feels warmer and muggier due to reduced sweat evaporation efficiency. This value reflects relative discomfort from both ends of the humidity spectrum.
+                            The result is measured in °C.
                         </p>
 
                         <code class="formula-line">
-                            <span class="param-windChill">windChill</span> = <span class="param-magic-number">13.12</span> + <span class="param-magic-number">0.6215</span> × <span class="param-T">T</span> <code><span class="param-magic-number">−11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> <code>+ <span class="param-magic-number">0.3965</span> × <span class="param-T">T</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> = <span id="windchill-value"></span>°C
+                            <span class="param-windChill">windChill</span> = <span class="param-magic-number">13.12</span> + <span class="param-magic-number">0.6215</span> × <span class="param-T">T</span> <code><span class="param-magic-number">− 11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> <code>+ <span class="param-magic-number">0.3965</span> × <span class="param-T">T</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> = <span id="windchill-value"></span>°C
                         </code>
 
                         <p class="formula-explanation">
-                            Will be shown as '-' if not applicable.<br><br>
+                            Wind chill is only defined for cold and windy conditions (≤ 10 °C and ≥ 1.3 m/s). Otherwise it is set to 0.<br><br>
                             The <a href="https://en.wikipedia.org/wiki/Wind_chill#North_American_and_United_Kingdom_wind_chill_index" class="formula-link" target="_blank">wind chill formula</a> is the official metric model adopted by multiple national weather agencies following the 2001 update.<br><br>
                             The constant <code class="param-magic-number">13.12</code> is a baseline starting point.
                             The term <code><span class="param-magic-number">0.6215</span> × <span class="param-T">T</span></code> represents direct warming from the actual air temperature.
-                            The subtraction term <code><span class="param-magic-number">−11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> models cooling from wind speed alone.<br>
+                            The subtraction term <code><span class="param-magic-number">− 11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> models cooling from wind speed alone.<br>
                             The final term <code>+ <span class="param-magic-number">0.3965</span> × <span class="param-T">T</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> adjusts that cooling effect based on how temperature interacts with wind speed.
                             <br><br>
                             The result estimates how much colder it feels on exposed skin compared to the actual temperature.
@@ -173,7 +175,7 @@
                         </code>
 
                         <p class="formula-explanation">
-                            This formula starts with Apparent Temperature and adds a boost from solar radiation, subtracts cooling from rain and accounts for dew point and humidity discomfort.
+                            This formula starts with Apparent Temperature and adds a boost from solar radiation, subtracts cooling from rain and accounts for dew point and humidity discomfort. Wind chill overrides this value if the conditions are cold and windy.
                         </p>
 
                         <p class="params-explanation">
@@ -216,6 +218,7 @@
                             <span id="dew-penalty-value" class="param-dewPenalty"></span>
                             The <code class="param-dewPenalty">dewPointPenalty</code> reflects how saturated the air is, based on the absolute dew point temperature <code class="param-D">D</code>. When <code class="param-D">D</code> rises above <span class="param-magic-number">16</span> °C, sweat evaporation becomes less efficient and the air feels more oppressive. This penalty only activates in warm, humid conditions and always subtracts from the perceived temperature. See more on
                             <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>.
+                            The result is measured in °C.
                         </p>
 
                         <code class="formula-line">
@@ -234,6 +237,7 @@
                             <a href="https://en.wikipedia.org/wiki/Humidity#Human_comfort" class="formula-link" target="_blank">comfort range of
                             <span class="param-magic-number">30</span>–<span class="param-magic-number">60</span>%</a>.
                             When <code class="param-RH">RH</code> is below the range, the air feels cooler and drier due to increased evaporation. When it's above, the air feels warmer and muggier due to reduced sweat evaporation efficiency. This value reflects relative discomfort from both ends of the humidity spectrum.
+                            The result is measured in °C.
                         </p>
 
                         <code class="formula-line">
@@ -241,7 +245,7 @@
                         </code>
 
                         <p class="formula-explanation">
-                            This <code>sunBoost</code> models indirect indoor sunlight exposure. When it's daytime (<code>isDay</code> is true), solar radiation is scaled to 10% of its outdoor effect using <code>log(1 + R) × 0.1</code>. The result is capped at 1.5 °C. At night, the value is 0.
+                            The <code class="param-R">sunBoost</code> models indirect indoor sunlight exposure. When it's daytime (<code>isDay</code> is true), solar radiation is scaled to 10% of its outdoor effect using <code>log(1 + R) × 0.1</code>. The result is capped at 1.5 °C. At night, the value is 0.
                         </p>
 
                         <code class="formula-line">
@@ -254,6 +258,7 @@
                             Wind is scaled down to 10% with <span class="param-magic-number">0.1</span> × <span class="param-v">v</span>, modeling limited indoor airflow like drafts or ventilation.
                             Sunlight is scaled by <span class="param-magic-number">0.1</span> × <span class="param-R">R</span>, simulating indirect exposure through windows.
                             This captures how insulation and barriers buffer indoor conditions from outdoor extremes.
+                            This omits rain and wind chill, as these have limited or no effect indoors.
                         </p>
 
                         <p class="params-explanation">
