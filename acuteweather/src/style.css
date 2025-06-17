@@ -28,24 +28,30 @@ body {
 /* Logo */
 /*******************************************/
 
+nav {
+	display: flex;
+	align-items: center;
+	padding: 0;
+}
+
 #acuteweather-logo {
   width: 6vw;
-  animation: squigglevision 0.4s linear infinite;
+  animation: squigglevision 0.45s linear infinite;
 }
 
 @keyframes squigglevision {
-	0%   { filter: url(#squiggly-0); }
-	25%  { filter: url(#squiggly-1); }
-	50%  { filter: url(#squiggly-2); }
-	75%  { filter: url(#squiggly-3); }
-	100% { filter: url(#squiggly-4); }
+	0%   { filter: url('#squiggly-0'); }
+	25%  { filter: url('#squiggly-1'); }
+	50%  { filter: url('#squiggly-2'); }
+	75%  { filter: url('#squiggly-3'); }
+	100% { filter: url('#squiggly-4'); }
 }
 
 /*******************************************/
 /* Main */
 /*******************************************/
 
-#user-gesture-button {
+/* #user-gesture-button {
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -56,7 +62,7 @@ body {
 	border: 2px solid black;
 	border-radius: 8px;
 	cursor: pointer;
-}
+} */
 
 /*******************************************/
 /* Weather Widget */
