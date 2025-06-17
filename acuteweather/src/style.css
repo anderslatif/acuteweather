@@ -153,13 +153,19 @@ body {
 	margin-left: 0.25rem;
 	white-space: nowrap;
 }
+.param-magic-number { color: grey }
 .param-T { color: #ff4444; }
 .param-RH { color: #44ff44; }
-.param-v { color: #4488ff; }
+.param-v { color: #0057e7; }
 .param-R { color: #ffee44; }
-.param-P { color: #44ffff; }
+.param-P { color: #00cccc; }
 .param-e { color: #ff44ff; }
 .param-AT { color: #b5651d; }
+.param-D { color: #007f8c; }
+.param-dewPenalty { color: #c87f0a; }
+.param-humidityDiscomfort { color: #8e44ad; }
+.param-windChill { color: #0055aa; }
+
 
 .param-const {
       color: #fc0;

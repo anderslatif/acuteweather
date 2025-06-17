@@ -9,30 +9,30 @@
     <body>
         <nav>
             <a href="/">
-                <img id="acuteweather-logo" src="/acuteweather_logo.png">
+                <img id="acuteweather-logo" src="/acuteweather_logo.png" alt="acuteweather logo">
             </a>
 
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none">
                 <defs>
                     <filter id="squiggly-0">
-                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="0"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
+                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="0" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
                     </filter>
                     <filter id="squiggly-1">
-                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="1"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/>
+                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="1" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
                     </filter>
                     <filter id="squiggly-2">
-                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="2"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
+                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="2" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
                     </filter>
                     <filter id="squiggly-3">
-                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="3"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3"/>
+                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="3" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
                     </filter>
                     <filter id="squiggly-4">
-                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="4"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
+                        <feTurbulence baseFrequency="0.02" numOctaves="3" result="noise" seed="4" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
                     </filter>
                 </defs>
             </svg>
@@ -42,7 +42,7 @@
             Tap to Load Weather
         </button>
 
-        <span id="loader"></span>
+        <span id="loader" role="status"></span>
 
         <div id="acute-weather-info-wrapper" style="display: none;">
 
@@ -51,6 +51,7 @@
                 <h4>
                     Current temperature (actual <span class="feels-like-emoji">🌡️</span>):
                 </h4>
+
                 <div class="temperature-box bordered">
                     <div id="acuteweather-temperature-actual" class="temperature-label">
                         Actual Temperature
@@ -62,6 +63,7 @@
                 <h4>
                     Feels like (outdoors <span class="feels-like-emoji">🏞️</span>):
                 </h4>
+
                 <div class="temperature-box rainbow-box">
                     <div id="acuteweather-temperature-outdoors" class="temperature-label">
                         Temperature Outdoors
@@ -74,49 +76,91 @@
                     <div class="formula-toggle">
                         Double click for the formula 🧮
                     </div>
+
                     <div class="formula-content">
                         <code class="formula-line">
-                            <span class="param-e">e</span> (vapor pressure hPa) = (<span class="param-RH">RH</span> / 100) × 6.105 × exp((17.27 × <span class="param-T">T</span>) / (237.7 + <span class="param-T">T</span>)) = <span id="vapor-pressure-value"></span> hPa
+                            <span class="param-e">e</span> (vapor pressure hPa) = (<span class="param-RH">RH</span> / <span class="param-magic-number">100</span>) × <span class="param-magic-number">6.105</span> × exp((<span class="param-magic-number">17.27</span> × <span class="param-T">T</span>) / (<span class="param-magic-number">237.7</span> + <span class="param-T">T</span>)) = <span id="vapor-pressure-value"></span> hPa
                         </code>
                         <br>
+
                         <p class="formula-explanation">
-                            This calculates the 
+                            This calculates the
                             <a class="formula-link" href="https://en.wikipedia.org/wiki/Apparent_temperature#Australian_apparent_temperature" target="_blank">
-                            vapor pressure <code>e</code></a> in hPa, based on temperature and humidity, which contributes to the perceived temperature in °C.
-                            <br><br><strong>Intuition:</strong> Higher humidity increases vapor pressure, which enhances warmth perception by reducing the body's ability to cool through evaporation.
+                                vapor pressure <code class="param-e">e</code>
+                            </a>
+                            in hPa, using temperature and relative humidity.
+                            It represents how much water vapor is present in the air, which influences how effectively the body can cool itself through sweat evaporation.
                         </p>
 
                         <code id="at-formula" class="formula-line">
-                            <span class="param-AT">AT</span> (Apparent Temperature) = <span class="param-T">T</span> + <span class="param-const">0.33</span> × <span class="param-e">e</span> − <span class="param-const">0.70</span> × <span class="param-v">v</span> − <span class="param-const">4.00</span> = <span id="at-value"></span>°C
+                            <span class="param-AT">AT</span> (Apparent Temperature) = <span class="param-T">T</span> + <span class="param-magic-number">0.33</span> × <span class="param-e">e</span> − <span class="param-magic-number">0.70</span> × <span class="param-v">v</span> − <span class="param-magic-number">4.00</span> = <span id="at-value"></span>°C
                         </code>
                         <br>
+
                         <p class="formula-explanation">
-                            0.33 boosts humidity’s warmth effect, 0.70 scales wind’s cooling, and 4.00 adjusts the baseline.
-                        </p>
-                        <p class="formula-explanation">
-                            They are calibration constants based on the <a class="formula-link" href="https://en.wikipedia.org/wiki/Apparent_temperature#Australian_apparent_temperature" target="_blank">Apparent Temperature formula</a>.
+                            The <code class="param-AT">Apparent Temperature</code> is a baseline measure of perceived temperature.
+                            It combines air temperature, vapor pressure and wind speed:
+                            <code>0.33 × <span class="param-e">e</span></code> adds warmth from humidity,
+                            <code>−0.70 × <span class="param-v">v</span></code> subtracts cooling from wind and
+                            <code>−4.00</code> is a constant calibration offset.
                         </p>
 
                         <code class="formula-line">
-                            sunBoost = min(3, log(1 + <span class="param-R">R</span>) × <span class="param-const">0.4</span>)
+                            <span class="param-R">sunBoost</span> = min(<span class="param-magic-number">3</span>, log(<span class="param-magic-number">1</span> + <span class="param-R">R</span>) × <span class="param-magic-number">0.4</span>)
                         </code>
+
                         <p class="formula-explanation">
-                            <span id="sun-boost-value"></span>The sunBoost function applies a diminishing return to radiation using log scaling, capped at 3°C. 
-                            <br><br><strong>Intuition:</strong> Sunlight increases warmth perception by a lot until a certain point where more sun light doesn’t keep increasing the warmth perception.
+                            <span id="sun-boost-value"></span>The <code>sunBoost</code> models how sunlight increases warmth perception.
+                            The <code>Math.log(1 + <span class="param-R">R</span>)</code> term adds a diminishing return as radiation increases: it rises quickly at first, then levels off.
+                            The multiplier <code>0.4</code> scales the impact into °C and the final value is capped at 3 °C to avoid unrealistic warmth under intense sun.
                         </p>
 
                         <code class="formula-line">
-                            rainPenalty = min(1.5, <span class="param-P">P</span> × <span class="param-const">0.3</span>)
+                            <span class="param-P">rainPenalty</span> = min(<span class="param-magic-number">1.5</span>, <span class="param-P">P</span> × <span class="param-magic-number">0.3</span>)
                         </code>
+
                         <p class="formula-explanation">
-                            <span id="rain-penalty-value"></span>The rain penalty grows linearly with precipitation but is capped at 1.5°C. 
-                            <br><br><strong>Intuition:</strong> Rainfall makes the temperature feel cooler, but the sensation plateaus as heavier rain doesn't make the temperature feel linearly colder.
+                            <span id="rain-penalty-value"></span>The <code>rainPenalty</code> models the cooling sensation caused by rainfall.
+                            The product <code><span class="param-P">P</span> × 0.3</code> increases the penalty linearly with precipitation rate, but it is capped at 1.5 °C to reflect saturation. Once you're soaked, more rain doesn’t make it feel significantly colder.
                         </p>
+
                         <code class="formula-line">
-                            FeelsLikeOutdoors = <span class="param-AT">AT</span> + sunBoost − rainPenalty = <span id="outdoor-feelslike-value"></span>°C
+                            <span class="param-dewPenalty">dewPenalty</span> = max(<span class="param-magic-number">0</span>, <span class="param-D">D</span> − <span class="param-magic-number">16</span>) × <span class="param-magic-number">0.2</span>
                         </code>
+
                         <p class="formula-explanation">
-                            My formula modifies Apparent Temperature by adding a scaled solar radiation boost and subtracting a capped rain penalty.
+                            <span id="dew-penalty-value" class="param-dewPenalty"></span>The dew point penalty relates to the body's ability to sweat. It can never have a positive effect (max of 0) and always subtracts from the felt temperature. See more on
+                            <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>. It kicks in only above 16 °C.
+                        </p>
+
+                        <code class="formula-line">
+                            <span class="param-humidityDiscomfort">humidityDiscomfort</span> = abs(<span class="param-RH">RH</span> − <span class="param-magic-number">45</span>) × <span class="param-magic-number">0.05</span>
+                        </code>
+
+                        <p class="formula-explanation">
+                            <span id="humidity-discomfort-value" class="param-humidityDiscomfort"></span>Humidity discomfort is triggered any time relative humidity is not 45% (<a href="https://en.wikipedia.org/wiki/Humidity#Human_comfort" class="formula-link" target="_blank">Source</a>). If it’s too low, the temperature will feel cooler and drier due to increased evaporation. If it’s too high, it will feel warmer and muggier because sweat can’t evaporate efficiently.
+                        </p>
+
+                        <code class="formula-line">
+                            <span class="param-windChill">windChill</span> = <span class="param-magic-number">13.12</span> + <span class="param-magic-number">0.6215</span> × <span class="param-T">T</span> − <span class="param-magic-number">11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup> + <span class="param-magic-number">0.3965</span> × <span class="param-T">T</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup>
+                        </code>
+
+                        <p class="formula-explanation">
+                            The <a href="https://en.wikipedia.org/wiki/Wind_chill#North_American_and_UK_method" class="formula-link" target="_blank">wind chill formula</a> is the official metric model adopted by multiple national weather agencies following the 2001 update.<br><br>
+                            The constant <code>13.12</code> is a baseline starting point.
+                            The term <code>0.6215 × <span class="param-T">T</span></code> represents direct warming from the actual air temperature.
+                            The subtraction term <code>−11.37 × <span class="param-v">v</span><sup>0.16</sup></code> models cooling from wind speed alone.
+                            The final term <code>+ 0.3965 × <span class="param-T">T</span> × <span class="param-v">v</span><sup>0.16</sup></code> adjusts that cooling effect based on how temperature interacts with wind speed.
+                            <br><br>
+                            The result estimates how much colder it feels on exposed skin compared to the actual temperature.
+                        </p>
+
+                        <code class="formula-line">
+                            FeelsLikeOutdoors = <span class="param-T">T</span> + <span class="param-magic-number">0.33</span> × <span class="param-e">e</span> − <span class="param-magic-number">0.70</span> × <span class="param-v">v</span> − <span class="param-magic-number">4.00</span> + <span class="param-R">sunBoost</span> − <span class="param-P">rainPenalty</span> − <span class="param-dewPenalty">dewPenalty</span> − <span class="param-humidityDiscomfort">humidityDiscomfort</span> = <span id="outdoor-feelslike-value"></span>°C
+                        </code>
+
+                        <p class="formula-explanation">
+                            This formula starts with Apparent Temperature and adds a boost from solar radiation, subtracts cooling from rain and accounts for dew point and humidity discomfort.
                         </p>
 
                         <p id="outdoor-result"></p>
@@ -127,32 +171,65 @@
                 <h4>
                     Feels like (indoors <span class="feels-like-emoji">🏠</span>):
                 </h4>
+
                 <div class="temperature-box grayscale">
                     <div id="acuteweather-temperature-indoors" class="temperature-label">
                         Temperature Indoors
                     </div>
                 </div>
-                <h2 id="acuteweather-formula-indoors"></h2>
+
                 <div id="acuteweather-formula-indoors" class="formula-box collapsed">
                     <div class="formula-toggle">
                         Double click for the formula 🧮
                     </div>
+
                     <div class="formula-content">
                         <code class="formula-line">
-                            <span class="param-e">e</span> (vapor pressure hPa) = (<span class="param-RH">RH</span> / 100) × 6.105 × exp((17.27 × <span class="param-T">T</span>) / (237.7 + <span class="param-T">T</span>))
+                            <span class="param-e">e</span> (vapor pressure hPa) = (<span class="param-RH">RH</span> / <span class="param-magic-number">100</span>) × <span class="param-magic-number">6.105</span> × exp((<span class="param-magic-number">17.27</span> × <span class="param-T">T</span>) / (<span class="param-magic-number">237.7</span> + <span class="param-T">T</span>))
                         </code>
                         <br>
+
                         <p class="formula-explanation">
                             <span id="indoor-vapor-pressure-value"></span>
                         </p>
 
                         <code class="formula-line">
-                            FeelsLikeIndoors = <span class="param-T">T</span> + <span class="param-const">0.33</span> × <span class="param-e">e</span> − <span class="param-const">4.00</span> = <span id="indoor-feelslike-value"></span>°C
+                            <span class="param-dewPenalty">dewPenalty</span> = max(<span class="param-magic-number">0</span>, <span class="param-D">D</span> − <span class="param-magic-number">16</span>) × <span class="param-magic-number">0.2</span>
+                        </code>
+
+                        <p class="formula-explanation">
+                            <span id="dew-penalty-value" class="param-dewPenalty"></span>The dew point penalty relates to the body's ability to sweat. It can never have a positive effect (max of 0) and always subtracts from the felt temperature. See more on
+                            <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>. It kicks in only above 16 °C.
+                        </p>
+
+                        <code class="formula-line">
+                            <span class="param-humidityDiscomfort">humidityDiscomfort</span> = abs(<span class="param-RH">RH</span> − <span class="param-magic-number">45</span>) × <span class="param-magic-number">0.05</span>
+                        </code>
+
+                        <p class="formula-explanation">
+                            <span id="humidity-discomfort-value" class="param-humidityDiscomfort"></span>Humidity discomfort is triggered any time relative humidity is not 45% (<a href="https://en.wikipedia.org/wiki/Humidity#Human_comfort" class="formula-link" target="_blank">Source</a>). If it’s too low, the temperature will feel cooler and drier due to increased evaporation. If it’s too high, it will feel warmer and muggier because sweat can’t evaporate efficiently.
+                        </p>
+
+                        <code class="formula-line">
+                            sunBoost = isDay ? min(<span class="param-magic-number">1.5</span>, log(<span class="param-magic-number">1</span> + <span class="param-R">R</span>) × <span class="param-magic-number">0.1</span>) : <span class="param-magic-number">0</span>
+                        </code>
+
+                        <p class="formula-explanation">
+                            This <code>sunBoost</code> models indirect indoor sunlight exposure. When it's daytime (<code>isDay</code> is true), solar radiation is scaled to 10% of its outdoor effect using <code>log(1 + R) × 0.1</code>. The result is capped at 1.5 °C. At night, the value is 0.
+                        </p>
+
+                        <code class="formula-line">
+                            FeelsLikeIndoors = <span class="param-T">T</span> + <span class="param-magic-number">0.33</span> × <span class="param-e">e</span> − <span class="param-magic-number">0.1</span> × <span class="param-v">v</span> + sunBoost − <span class="param-dewPenalty">dewPenalty</span> − <span class="param-humidityDiscomfort">humidityDiscomfort</span> = <span id="indoor-feelslike-value"></span>°C
                         </code>
                         <br>
+
                         <p class="formula-explanation">
-                            This uses the same formula as outdoors, but with wind, sun, and rain being set to zero indoors.
+                            Indoors, environmental effects are reduced.
+                            Wind is scaled down to 10% with <code>0.1 × <span class="param-v">v</span></code>, modeling limited indoor airflow like drafts or ventilation.
+                            Sunlight is scaled by <code>0.1 × <span class="param-R">R</span></code>, simulating indirect exposure through windows.
+                            This captures how insulation and barriers buffer indoor conditions from outdoor extremes.
                         </p>
+
                         <p id="indoor-result"></p>
                         <ul id="indoor-params"></ul>
                     </div>
