@@ -33,9 +33,6 @@ function displayFeelsLikeFormulas(feelsLike) {
 		["R", `${feelsLike.R.toFixed(1)} ← solar radiation (W/m²)`],
 		["P", `${feelsLike.P.toFixed(2)} ← precipitation (mm/h)`],
 		["D", `${feelsLike.D.toFixed(1)} ← dew point (°C)`],
-		["dewPenalty", `${feelsLike.dewPenalty.toFixed(2)} ← dew point penalty (°C)`],
-		["humidityDiscomfort", `${feelsLike.humidityDiscomfort.toFixed(2)} ← discomfort from humidity deviation (°C)`],
-		["windChill", `${feelsLike.windChill?.toFixed(2) ?? "–"} ← wind chill (°C)`],
 	].forEach(([label, value]) => {
 		const li = document.createElement("li");
 		li.innerHTML = `
@@ -49,10 +46,9 @@ function displayFeelsLikeFormulas(feelsLike) {
 	[
         ["T", `${feelsLike.T} ← air temperature (°C)`],
 		["RH", `${feelsLike.RH} ← relative humidity (%)`],
-		["e", `${feelsLike.vaporPressure.toFixed(2)} ← vapor pressure (hPa)`],
-		["dewPenalty", `${feelsLike.dewPenalty.toFixed(2)} ← dew point penalty (°C)`],
-		["humidityDiscomfort", `${feelsLike.humidityDiscomfort.toFixed(2)} ← discomfort from humidity deviation (°C)`],
-		["windChill", `${feelsLike.windChill?.toFixed(2) ?? "–"} ← wind chill (°C). Will be shown as '-' if not applicable`],
+		["R", `${feelsLike.R.toFixed(1)} ← solar radiation (W/m²)`],
+		["D", `${feelsLike.D.toFixed(1)} ← dew point (°C)`],
+
 	].forEach(([label, value]) => {
 		const li = document.createElement("li");
 		li.innerHTML = `
@@ -63,12 +59,19 @@ function displayFeelsLikeFormulas(feelsLike) {
 		indoorParams.appendChild(li);
 	});
 
-	document.getElementById("vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);
+	
+    // Update all new formula value spans
+    document.getElementById("vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);
     document.getElementById("at-value").textContent = (feelsLike.T + 0.33 * feelsLike.vaporPressure - 0.70 * feelsLike.v).toFixed(2);
-    // document.getElementById("dew-penalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
-    // document.getElementById("humidity-discomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
-    // document.getElementById("wind-chill-value").textContent = feelsLike.windChill ? feelsLike.windChill.toFixed(2) : "–";
-
+    document.getElementById("sunboost-value").textContent = feelsLike.sunBoostOutdoor.toFixed(2);
+    document.getElementById("rainpenalty-value").textContent = feelsLike.rainPenaltyOutdoor.toFixed(2);
+    document.getElementById("dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
+    document.getElementById("humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
+    document.getElementById("windchill-value").textContent = typeof feelsLike.windChill === "number" ? feelsLike.windChill.toFixed(2) : "–";
+    document.getElementById("indoor-vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);
+    document.getElementById("indoor-dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
+    document.getElementById("indoor-humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
+    document.getElementById("indoor-sunboost-value").textContent = feelsLike.sunBoostIndoor.toFixed(2);
     document.getElementById("outdoor-feelslike-value").textContent = feelsLike.feelsLikeOutdoorsPrecise.toFixed(4);
     document.getElementById("indoor-feelslike-value").textContent = feelsLike.feelsLikeIndoorsPrecise.toFixed(4);
 	

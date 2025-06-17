@@ -117,7 +117,6 @@ body {
 }
 .formula-box code {
   background: #111;
-  color: #fafafa;
   padding: 0.2rem 0.4rem;
   border-radius: 0.3rem;
 }
@@ -150,7 +149,6 @@ body {
 .formula-link {
 	color: #0af;
 	display: inline;
-	margin-left: 0.25rem;
 	white-space: nowrap;
 }
 .param-magic-number { color: grey }
@@ -166,14 +164,14 @@ body {
 .param-humidityDiscomfort { color: #8e44ad; }
 .param-windChill { color: #0055aa; }
 
-
-.param-const {
-      color: #fc0;
-}
 .formula-line {
 	white-space: normal;
 	word-break: break-word;
 	line-height: 1.4;
+}
+
+.params-explanation {
+  text-align: center;
 }
 
 /*******************************************/

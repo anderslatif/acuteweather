@@ -5,7 +5,7 @@ export function computeFeelsLike({
 	solarRadiation,
 	precipitationMmPerHr,
 	dewPoint,
-	isDay
+	current_weather
 }) {
 	const T = temperatureC;
 	const RH = relativeHumidity;
@@ -13,7 +13,7 @@ export function computeFeelsLike({
 	const R = solarRadiation;
 	const P = precipitationMmPerHr;
 	const D = dewPoint;
-	const dayMultiplier = isDay ? 1 : 0;
+	const dayMultiplier = current_weather.is_day ? 1 : 0;
 
 	const vaporPressure = (RH / 100) * 6.105 * Math.exp((17.27 * T) / (237.7 + T));
 	const dewPenalty = Math.max(0, D - 16) * 0.2;
