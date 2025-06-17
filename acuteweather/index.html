@@ -130,16 +130,27 @@
                         </code>
 
                         <p class="formula-explanation">
-                            <span id="dew-penalty-value" class="param-dewPenalty"></span>The <code class="param-dewPenalty">dewPointPenalty</code> relates to the body's ability to sweat. It can never have a positive effect (max of <span class="param-magic-number">0</span>) and always subtracts from the felt temperature. See more on
-                            <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>. It kicks in only above <span class="param-magic-number">16</span> °C.
+                            <span id="dew-penalty-value" class="param-dewPenalty"></span>
+                            The <code class="param-dewPenalty">dewPointPenalty</code> reflects how saturated the air is, based on the absolute dew point temperature <code class="param-D">D</code>. When <code class="param-D">D</code> rises above <span class="param-magic-number">16</span> °C, sweat evaporation becomes less efficient and the air feels more oppressive. This penalty only activates in warm, humid conditions and always subtracts from the perceived temperature. See more on
+                            <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>.
                         </p>
 
                         <code class="formula-line">
-                            <span class="param-humidityDiscomfort">humidityDiscomfort</span> = abs(<span class="param-RH">RH</span> − <span class="param-magic-number">45</span>) × <span class="param-magic-number">0.05</span> = <span id="humiditydiscomfort-value"></span>°C
+                            <span class="param-humidityDiscomfort">humidityDiscomfort</span> =
+                            <span class="param-RH">RH</span> &lt; <span class="param-magic-number">30</span>
+                            ? (<span class="param-magic-number">30</span> − <span class="param-RH">RH</span>) × <span class="param-magic-number">0.08</span>
+                            : <span class="param-RH">RH</span> &gt; <span class="param-magic-number">60</span>
+                            ? (<span class="param-RH">RH</span> − <span class="param-magic-number">60</span>) × <span class="param-magic-number">0.08</span>
+                            : <span class="param-magic-number">0</span>
+                            = <span id="humiditydiscomfort-value"></span>°C
                         </code>
 
                         <p class="formula-explanation">
-                            <span id="humidity-discomfort-value" class="param-humidityDiscomfort"></span><code class="param-humidityDiscomfort">humidityDiscomfort</code> is triggered any time relative humidity is not <span class="param-magic-number">45</span>% (<a href="https://en.wikipedia.org/wiki/Humidity#Human_comfort" class="formula-link" target="_blank">Source</a>). If it’s too low, the temperature will feel cooler and drier due to increased evaporation. If it’s too high, it will feel warmer and muggier because sweat can’t evaporate efficiently.
+                            <span id="humidity-discomfort-value" class="param-humidityDiscomfort"></span>
+                            <code class="param-humidityDiscomfort">humidityDiscomfort</code> is triggered whenever relative humidity <code class="param-RH">RH</code> falls outside the
+                            <a href="https://en.wikipedia.org/wiki/Humidity#Human_comfort" class="formula-link" target="_blank">comfort range of
+                            <span class="param-magic-number">30</span>–<span class="param-magic-number">60</span>%</a>.
+                            When <code class="param-RH">RH</code> is below the range, the air feels cooler and drier due to increased evaporation. When it's above, the air feels warmer and muggier due to reduced sweat evaporation efficiency. This value reflects relative discomfort from both ends of the humidity spectrum.
                         </p>
 
                         <code class="formula-line">
@@ -147,8 +158,8 @@
                         </code>
 
                         <p class="formula-explanation">
-                            Will be shown as '-' if not applicable. <br>
-                            The <a href="https://en.wikipedia.org/wiki/Wind_chill#North_American_and_UK_method" class="formula-link" target="_blank">wind chill formula</a> is the official metric model adopted by multiple national weather agencies following the 2001 update.<br><br>
+                            Will be shown as '-' if not applicable.<br><br>
+                            The <a href="https://en.wikipedia.org/wiki/Wind_chill#North_American_and_United_Kingdom_wind_chill_index" class="formula-link" target="_blank">wind chill formula</a> is the official metric model adopted by multiple national weather agencies following the 2001 update.<br><br>
                             The constant <code class="param-magic-number">13.12</code> is a baseline starting point.
                             The term <code><span class="param-magic-number">0.6215</span> × <span class="param-T">T</span></code> represents direct warming from the actual air temperature.
                             The subtraction term <code><span class="param-magic-number">−11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> models cooling from wind speed alone.<br>
@@ -166,7 +177,7 @@
                         </p>
 
                         <p class="params-explanation">
-                            The values are the actual current weather values.
+                            The values below are the actual current weather values.
                         </p>
                         <ul id="outdoor-params"></ul>
                     </div>
@@ -202,16 +213,27 @@
                         </code>
 
                         <p class="formula-explanation">
-                            <span id="dew-penalty-value" class="param-dewPenalty"></span>The <code class="param-dewPenalty">dewPointPenalty</code> relates to the body's ability to sweat. It can never have a positive effect (max of <span class="param-magic-number">0</span>) and always subtracts from the felt temperature. See more on
-                            <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>. It kicks in only above <span class="param-magic-number">16</span> °C.
+                            <span id="dew-penalty-value" class="param-dewPenalty"></span>
+                            The <code class="param-dewPenalty">dewPointPenalty</code> reflects how saturated the air is, based on the absolute dew point temperature <code class="param-D">D</code>. When <code class="param-D">D</code> rises above <span class="param-magic-number">16</span> °C, sweat evaporation becomes less efficient and the air feels more oppressive. This penalty only activates in warm, humid conditions and always subtracts from the perceived temperature. See more on
+                            <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>.
                         </p>
 
                         <code class="formula-line">
-                            <span class="param-humidityDiscomfort">humidityDiscomfort</span> = abs(<span class="param-RH">RH</span> − <span class="param-magic-number">45</span>) × <span class="param-magic-number">0.05</span> = <span id="indoor-humiditydiscomfort-value"></span>°C
+                            <span class="param-humidityDiscomfort">humidityDiscomfort</span> =
+                            RH &lt; <span class="param-magic-number">30</span>
+                            ? (<span class="param-magic-number">30</span> − <span class="param-RH">RH</span>) × <span class="param-magic-number">0.08</span>
+                            : RH &gt; <span class="param-magic-number">60</span>
+                            ? (<span class="param-RH">RH</span> − <span class="param-magic-number">60</span>) × <span class="param-magic-number">0.08</span>
+                            : <span class="param-magic-number">0</span>
+                            = <span id="indoor-humiditydiscomfort-value"></span>°C
                         </code>
 
                         <p class="formula-explanation">
-                            <span id="humidity-discomfort-value" class="param-humidityDiscomfort"></span><code class="param-humidityDiscomfort">humidityDiscomfort</code> is triggered any time relative humidity is not <span class="param-magic-number">45</span>% (<a href="https://en.wikipedia.org/wiki/Humidity#Human_comfort" class="formula-link" target="_blank">Source</a>). If it’s too low, the temperature will feel cooler and drier due to increased evaporation. If it’s too high, it will feel warmer and muggier because sweat can’t evaporate efficiently.
+                            <span id="humidity-discomfort-value" class="param-humidityDiscomfort"></span>
+                            <code class="param-humidityDiscomfort">humidityDiscomfort</code> is triggered whenever relative humidity <code class="param-RH">RH</code> falls outside the
+                            <a href="https://en.wikipedia.org/wiki/Humidity#Human_comfort" class="formula-link" target="_blank">comfort range of
+                            <span class="param-magic-number">30</span>–<span class="param-magic-number">60</span>%</a>.
+                            When <code class="param-RH">RH</code> is below the range, the air feels cooler and drier due to increased evaporation. When it's above, the air feels warmer and muggier due to reduced sweat evaporation efficiency. This value reflects relative discomfort from both ends of the humidity spectrum.
                         </p>
 
                         <code class="formula-line">
@@ -235,7 +257,7 @@
                         </p>
 
                         <p class="params-explanation">
-                            The values are the actual current weather values.
+                            The values below are the actual current weather values.
                         </p>
                         <ul id="indoor-params"></ul>
                     </div>

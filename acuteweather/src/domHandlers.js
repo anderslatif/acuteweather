@@ -27,34 +27,36 @@ function displayFeelsLikeFormulas(feelsLike) {
 	indoorParams.innerHTML = "";
 
 	[
-		["T", `${feelsLike.T} ← air temperature (°C)`],
-		["RH", `${feelsLike.RH} ← relative humidity (%)`],
-		["v", `${feelsLike.v.toFixed(2)} ← wind speed (m/s)`],
-		["R", `${feelsLike.R.toFixed(1)} ← solar radiation (W/m²)`],
-		["P", `${feelsLike.P.toFixed(2)} ← precipitation (mm/h)`],
-		["D", `${feelsLike.D.toFixed(1)} ← dew point (°C)`],
-	].forEach(([label, value]) => {
+		["T", feelsLike.T, "← air temperature (°C)"],
+		["RH", feelsLike.RH, "← relative humidity (%)"],
+		["v", feelsLike.v.toFixed(2), "← wind speed (m/s)"],
+		["R", feelsLike.R.toFixed(1), "← solar radiation (W/m²)"],
+		["P", feelsLike.P.toFixed(2), "← precipitation (mm/h)"],
+		["D", feelsLike.D.toFixed(1), "← dew point (°C)"],
+	].forEach(([label, actual, explanation]) => {
 		const li = document.createElement("li");
 		li.innerHTML = `
 			<span class="param-label param-${label}">${label}</span>
 			<span class="param-arrow">=</span>
-			<span class="param-value">${value}</span>
+			<span class="param-actual-value">${actual}</span>
+			<span class="param-value">${explanation}</span>
 		`;
 		outdoorParams.appendChild(li);
 	});
 
 	[
-        ["T", `${feelsLike.T} ← air temperature (°C)`],
-		["RH", `${feelsLike.RH} ← relative humidity (%)`],
-		["R", `${feelsLike.R.toFixed(1)} ← solar radiation (W/m²)`],
-		["D", `${feelsLike.D.toFixed(1)} ← dew point (°C)`],
+        ["T", feelsLike.T, "← air temperature (°C)"],
+		["RH", feelsLike.RH, "← relative humidity (%)"],
+		["R", feelsLike.R.toFixed(1), "← solar radiation (W/m²)"],
+		["D", feelsLike.D.toFixed(1), "← dew point (°C)"],
 
-	].forEach(([label, value]) => {
+	].forEach(([label, actual, explanation]) => {
 		const li = document.createElement("li");
 		li.innerHTML = `
 			<span class="param-label param-${label}">${label}</span>
 			<span class="param-arrow">=</span>
-			<span class="param-value">${value}</span>
+			<span class="param-actual-value">${actual}</span>
+			<span class="param-value">${explanation}</span>
 		`;
 		indoorParams.appendChild(li);
 	});

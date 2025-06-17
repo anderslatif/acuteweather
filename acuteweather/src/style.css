@@ -149,8 +149,11 @@ nav {
   width: 1rem;
   text-align: center;
 }
-.param-value {
-  flex: 1;
+.param-actual-value {
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: green;
+  width: 2rem;
 }
 .formula-link {
 	color: #0af;

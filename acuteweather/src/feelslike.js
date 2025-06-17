@@ -17,7 +17,11 @@ export function computeFeelsLike({
 
 	const vaporPressure = (RH / 100) * 6.105 * Math.exp((17.27 * T) / (237.7 + T));
 	const dewPenalty = Math.max(0, D - 16) * 0.2;
-	const humidityDiscomfort = Math.abs(RH - 45) * 0.05;
+	const humidityDiscomfort = RH < 30
+		? (30 - RH) * 0.08
+		: RH > 60
+		? (RH - 60) * 0.08
+		: 0;
 
 	const sunBoostOutdoor = Math.min(6, (R / 100)) * dayMultiplier;
 	const rainPenaltyOutdoor = Math.min(1.5, P * 0.3);
