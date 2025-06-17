@@ -12,8 +12,8 @@ export function displayWeatherWidget(weatherInfo, labelInfo) {
 
 function updateWeatherInfo(weatherInfo, labelInfo) {
 	document.getElementById("acuteweather-temperature-actual").textContent = `${weatherInfo.temperatureC}°C`;
-	document.getElementById("acuteweather-temperature-outdoors").textContent = `${weatherInfo.feelsLikeOutdoors}°C`;
-	document.getElementById("acuteweather-temperature-indoors").textContent = `${weatherInfo.feelsLikeIndoors}°C`;
+	document.getElementById("acuteweather-temperature-outdoors").textContent = `${weatherInfo.feelsLikeOutdoors.toFixed(2)}°C`;
+	document.getElementById("acuteweather-temperature-indoors").textContent = `${weatherInfo.feelsLikeIndoors.toFixed(2)}°C`;
 
 	document.getElementById("acuteweather-label-sentence").innerHTML =  labelInfo.getSentence();
 }
@@ -74,8 +74,10 @@ function displayFeelsLikeFormulas(feelsLike) {
     document.getElementById("indoor-dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
     document.getElementById("indoor-humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
     document.getElementById("indoor-sunboost-value").textContent = feelsLike.sunBoostIndoor.toFixed(2);
-    document.getElementById("outdoor-feelslike-value").textContent = feelsLike.feelsLikeOutdoorsPrecise.toFixed(4);
-    document.getElementById("indoor-feelslike-value").textContent = feelsLike.feelsLikeIndoorsPrecise.toFixed(4);
+	document.getElementById("indoor-baseline-value").textContent = feelsLike.baselineIndoors.toFixed(2);
+
+	document.getElementById("outdoor-feelslike-value").textContent = feelsLike.feelsLikeOutdoors.toFixed(4);
+    document.getElementById("indoor-feelslike-value").textContent = feelsLike.feelsLikeIndoors.toFixed(4);
 	
 }
 
@@ -86,7 +88,7 @@ function updateAxesValue(axis, value, min, max) {
 	const percentage = ((clampedValue - min) / (max - min)) * 100;
 	fill.style.width = `${percentage}%`;
 
-    createTooltip(fill, axis, clampedValue);
+    createTooltip(fill, axis, clampedValue.toFixed(2));
 }
 
 function createTooltip(fillElement, axis, value) {

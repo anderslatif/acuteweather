@@ -160,8 +160,8 @@
                         </code>
 
                         <p class="formula-explanation">
-                            Wind chill is only defined for cold and windy conditions (≤ 10 °C and ≥ 1.3 m/s). Otherwise it is set to 0.<br><br>
                             The <a href="https://en.wikipedia.org/wiki/Wind_chill#North_American_and_United_Kingdom_wind_chill_index" class="formula-link" target="_blank">wind chill formula</a> is the official metric model adopted by multiple national weather agencies following the 2001 update.<br><br>
+                            Wind chill is only defined for cold and windy conditions (≤ 10 °C and ≥ 1.3 m/s). Otherwise it is set to 0.<br><br>
                             The constant <code class="param-magic-number">13.12</code> is a baseline starting point.
                             The term <code><span class="param-magic-number">0.6215</span> × <span class="param-T">T</span></code> represents direct warming from the actual air temperature.
                             The subtraction term <code><span class="param-magic-number">− 11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> models cooling from wind speed alone.<br>
@@ -249,16 +249,19 @@
                         </p>
 
                         <code class="formula-line">
-                            FeelsLikeIndoors = <span class="param-T">T</span> + <span class="param-magic-number">0.33</span> × <span class="param-e">e</span> − <span class="param-magic-number">0.1</span> × <span class="param-v">v</span> + sunBoost − <span class="param-dewPenalty">dewPenalty</span> − <span class="param-humidityDiscomfort">humidityDiscomfort</span> = <span id="indoor-feelslike-value"></span>°C
+                            <span class="baselineIndoors">baselineIndoors</span> = <span class="param-T">T</span> + min(<span class="param-magic-number">0.33</span> × <span class="param-e">e</span>, <span class="param-magic-number">4</span>) − <span class="param-magic-number">2</span> = <span id="indoor-baseline-value"></span>°C
+                        </code>
+                        <p class="formula-explanation">
+                            This intermediate step, called <code class="baselineIndoors">baselineIndoors</code>, estimates the perceived indoor temperature without solar effects.
+                            It starts with air temperature and adds moisture via vapor pressure (capped at 4 °C), then subtracts a fixed <span class="param-magic-number">2</span> °C penalty to simulate insulation and comfort indoors.
+                        </p>
+                        <code class="formula-line">
+                            FeelsLikeIndoors = <span class="param-T">T</span> + <span class="param-magic-number">0.33</span> × <span class="param-e">e</span> − <span class="param-magic-number">0.1</span> × <span class="param-v">v</span> + <span class="param-R">sunBoost</span> − <span class="param-dewPenalty">dewPenalty</span> − <span class="param-humidityDiscomfort">humidityDiscomfort</span> = <span id="indoor-feelslike-value"></span>°C
                         </code>
                         <br>
 
                         <p class="formula-explanation">
-                            Indoors, environmental effects are reduced.
-                            Wind is scaled down to 10% with <span class="param-magic-number">0.1</span> × <span class="param-v">v</span>, modeling limited indoor airflow like drafts or ventilation.
-                            Sunlight is scaled by <span class="param-magic-number">0.1</span> × <span class="param-R">R</span>, simulating indirect exposure through windows.
-                            This captures how insulation and barriers buffer indoor conditions from outdoor extremes.
-                            This omits rain and wind chill, as these have limited or no effect indoors.
+                            Indoors, environmental effects are reduced. Wind is scaled down to 10% with <span class="param-magic-number">0.1</span> × <span class="param-v">v</span>, modeling limited indoor airflow like drafts or ventilation. Sunlight is scaled by <span class="param-magic-number">0.1</span> × <span class="param-R">R</span>, simulating indirect exposure through windows. This captures how insulation and barriers buffer indoor conditions from outdoor extremes. Wind chill and rain are excluded. The final value is adjusted downward by <span class="param-magic-number">2</span> °C to better match perceived comfort indoors.
                         </p>
 
                         <p class="params-explanation">
