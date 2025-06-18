@@ -69,7 +69,7 @@ function displayFeelsLikeFormulas(feelsLike) {
     document.getElementById("rainpenalty-value").textContent = feelsLike.rainPenaltyOutdoor.toFixed(2);
     document.getElementById("dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
     document.getElementById("humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
-    document.getElementById("windchill-value").textContent = typeof feelsLike.windChill === "number" ? feelsLike.windChill.toFixed(2) : "–";
+    document.getElementById("windchill-value").textContent = feelsLike.windChill.toFixed(2);
     document.getElementById("indoor-vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);
     document.getElementById("indoor-dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
     document.getElementById("indoor-humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);

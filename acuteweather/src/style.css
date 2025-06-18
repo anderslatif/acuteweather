@@ -160,18 +160,22 @@ nav {
 	display: inline;
 	white-space: nowrap;
 }
-.param-magic-number { color: grey }
-.param-T { color: #ff4444; }
-.param-RH { color: #44ff44; }
-.param-v { color: #0057e7; }
-.param-R { color: #ffee44; }
-.param-P { color: #00cccc; }
-.param-e { color: #ff44ff; }
-.param-AT { color: #b5651d; }
-.param-D { color: #007f8c; }
-.param-dewPenalty { color: #c87f0a; }
-.param-humidityDiscomfort { color: #8e44ad; }
-.param-windChill { color: #0055aa; }
+.param-magic-number { color: #999999; }
+.param-T { color: #e53935; }
+.param-RH { color: #43a047; }
+.param-v { color: #1e88e5; }
+.param-R { color: #fdd835; }
+.param-P { color: #00acc1; }
+.param-e { color: #ab47bc; }
+.param-AT { color: #bf360c; }
+.param-D { color: #00897b; }
+.param-dewPenalty { color: #ef6c00; }
+.param-humidityDiscomfort { color: #ba68c8; }
+.param-humidityDiscomfortIndoor { color: #6a1b9a; }
+.param-windChill { color: #1565c0; }
+.param-baselineIndoors { color: #8d6e63; }
+.param-indirectWindEffect { color: #ec407a; }
+
 
 .formula-line {
 	white-space: normal;
