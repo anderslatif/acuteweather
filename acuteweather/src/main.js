@@ -45,7 +45,6 @@ document.querySelectorAll('.formula-box').forEach((box) => {
         box.classList.toggle('collapsed');
     });
 });
-
 setInterval(async () => {
     const newWeatherInfo = await getWeatherInfo(location);
     if (newWeatherInfo.temperatureC !== weatherInfo.temperatureC ||
