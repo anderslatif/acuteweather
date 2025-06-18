@@ -280,4 +280,10 @@ nav {
   .labels {
     font-size: 0.5rem;
   }
+  .formula-box {
+    width: 80vw;
+  }
+  .temperature-box {
+    min-width: 35vw !important;
+  }
 }

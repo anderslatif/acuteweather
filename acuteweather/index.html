@@ -100,7 +100,6 @@
                             <span id="dew-penalty-value" class="param-dewPenalty"></span>
                             The <code class="param-dewPenalty">dewPointPenalty</code> reflects how saturated the air is, based on the absolute dew point temperature <code class="param-D">D</code>. When <code class="param-D">D</code> rises above <span class="param-magic-number">16</span> °C, sweat evaporation becomes less efficient and the air feels more oppressive. This penalty only activates in warm, humid conditions and always subtracts from the perceived temperature. See more on
                             <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>.
-                            The result is measured in °C.
                         </p>
                         <!-- 3. Humidity Discomfort -->
                         <code class="formula-line">
@@ -232,7 +231,7 @@
                             <span class="param-humidityDiscomfortIndoor"><span class="param-humidityDiscomfortIndoor">humidityDiscomfortIndoor</span></span> = <span class="param-humidityDiscomfort">humidityDiscomfort</span> × 0.5 = <span id="indoors-humiditydiscomfort-value"></span>°C
                         </code>
                         <p class="formula-explanation">
-                            <span class="param-humidityDiscomfortIndoor"><span class="param-humidityDiscomfortIndoor">humidityDiscomfortIndoor</span></span> adjusts the discomfort effect from humidity by halving the outdoor value. Indoors, the humidity is set to have half the impact.
+                            <span class="param-humidityDiscomfortIndoor"><span class="param-humidityDiscomfortIndoor">humidityDiscomfortIndoor</span></span> adjusts the discomfort effect from humidity by halving the outdoor value. 
                         </p>
                         <!-- 5. Dew Point Penalty -->
                         <code class="formula-line">
@@ -242,7 +241,6 @@
                             <span id="dew-penalty-value" class="param-dewPenalty"></span>
                             The <code class="param-dewPenalty">dewPointPenalty</code> reflects how saturated the air is, based on the absolute dew point temperature <code class="param-D">D</code>. When <code class="param-D">D</code> rises above <span class="param-magic-number">16</span> °C, sweat evaporation becomes less efficient and the air feels more oppressive. This penalty only activates in warm, humid conditions and always subtracts from the perceived temperature. See more on
                             <a href="https://en.wikipedia.org/wiki/Dew_point#Relationship_to_human_comfort" class="formula-link" target="_blank">dew point and human comfort</a>.
-                            The result is measured in °C.
                         </p>
                         <!-- 6. FeelsLikeIndoors -->
                         <code class="formula-line">
