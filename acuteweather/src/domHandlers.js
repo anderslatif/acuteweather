@@ -20,8 +20,8 @@ function updateWeatherInfo(weatherInfo, labelInfo) {
 
 function displayFeelsLikeFormulas(feelsLike) {
 
-	const outdoorParams = document.getElementById("outdoor-params");
-	const indoorParams = document.getElementById("indoor-params");
+	const outdoorParams = document.getElementById("outdoors-params");
+	const indoorParams = document.getElementById("indoors-params");
 
 	outdoorParams.innerHTML = "";
 	indoorParams.innerHTML = "";
@@ -63,21 +63,23 @@ function displayFeelsLikeFormulas(feelsLike) {
 
 	
     // Update all new formula value spans
-    document.getElementById("vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);
-    document.getElementById("at-value").textContent = (feelsLike.T + 0.33 * feelsLike.vaporPressure - 0.70 * feelsLike.v).toFixed(2);
-    document.getElementById("sunboost-value").textContent = feelsLike.sunBoostOutdoor.toFixed(2);
-    document.getElementById("rainpenalty-value").textContent = feelsLike.rainPenaltyOutdoor.toFixed(2);
-    document.getElementById("dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
-    document.getElementById("humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
-    document.getElementById("windchill-value").textContent = feelsLike.windChill.toFixed(2);
-    document.getElementById("indoor-vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);
-    document.getElementById("indoor-dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
-    document.getElementById("indoor-humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
-    document.getElementById("indoor-sunboost-value").textContent = feelsLike.sunBoostIndoor.toFixed(2);
-	document.getElementById("indoor-baseline-value").textContent = feelsLike.baselineIndoors.toFixed(2);
+    document.getElementById("outdoors-vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);
+    document.getElementById("outdoors-at-value").textContent = (feelsLike.T + 0.33 * feelsLike.vaporPressure - 0.70 * feelsLike.v).toFixed(2);
+    document.getElementById("outdoors-sunboost-value").textContent = feelsLike.sunBoostOutdoor.toFixed(2);
+    document.getElementById("outdoors-rainpenalty-value").textContent = feelsLike.rainPenaltyOutdoor.toFixed(2);
+    document.getElementById("outdoors-dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
+    document.getElementById("outdoors-humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
+    document.getElementById("outdoors-windchill-value").textContent = feelsLike.windChill.toFixed(2);
+    document.getElementById("outdoors-feelslike-value").textContent = feelsLike.feelsLikeOutdoors.toFixed(4);
 
-	document.getElementById("outdoor-feelslike-value").textContent = feelsLike.feelsLikeOutdoors.toFixed(4);
-    document.getElementById("indoor-feelslike-value").textContent = feelsLike.feelsLikeIndoors.toFixed(4);
+	document.getElementById("indoors-vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);
+    document.getElementById("indoors-sunboost-value").textContent = feelsLike.sunBoostIndoors.toFixed(2);
+    document.getElementById("indoors-indirectwindeffect-value").textContent = feelsLike.indirectWindEffect.toFixed(2);
+	document.getElementById("indoors-dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
+    document.getElementById("indoors-humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
+	document.getElementById("indoors-baseline-value").textContent = feelsLike.baselineIndoors.toFixed(2);
+    document.getElementById("indoors-feelslike-value").textContent = feelsLike.feelsLikeIndoors.toFixed(4);
+
 	
 }
 

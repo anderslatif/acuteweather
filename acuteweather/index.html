@@ -81,7 +81,7 @@
                     <div class="formula-content">
                         <!-- 1. Vapor pressure e -->
                         <code class="formula-line">
-                            <span class="param-e">e</span> (vapor pressure hPa) = (<span class="param-RH">RH</span> / <span class="param-magic-number">100</span>) × <span class="param-magic-number">6.105</span> × exp((<span class="param-magic-number">17.27</span> × <span class="param-T">T</span>) / (<span class="param-magic-number">237.7</span> + <span class="param-T">T</span>)) = <span id="vapor-pressure-value"></span>hPa
+                            <span class="param-e">e</span> (vapor pressure hPa) = (<span class="param-RH">RH</span> / <span class="param-magic-number">100</span>) × <span class="param-magic-number">6.105</span> × exp((<span class="param-magic-number">17.27</span> × <span class="param-T">T</span>) / (<span class="param-magic-number">237.7</span> + <span class="param-T">T</span>)) = <span id="outdoors-vapor-pressure-value"></span>hPa
                         </code>
                         <br>
                         <p class="formula-explanation">
@@ -94,7 +94,7 @@
                         </p>
                         <!-- 2. Dew Point Penalty -->
                         <code class="formula-line">
-                            <span class="param-dewPenalty">dewPointPenalty</span> = max(<span class="param-magic-number">0</span>, <span class="param-D">D</span> − <span class="param-magic-number">16</span>) × <span class="param-magic-number">0.2</span> = <span id="dewpenalty-value"></span>°C
+                            <span class="param-dewPenalty">dewPointPenalty</span> = max(<span class="param-magic-number">0</span>, <span class="param-D">D</span> − <span class="param-magic-number">16</span>) × <span class="param-magic-number">0.2</span> = <span id="outdoors-dewpenalty-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             <span id="dew-penalty-value" class="param-dewPenalty"></span>
@@ -110,7 +110,7 @@
                             : <span class="param-RH">RH</span> &gt; <span class="param-magic-number">60</span>
                             ? (<span class="param-RH">RH</span> − <span class="param-magic-number">60</span>) × <span class="param-magic-number">0.08</span>
                             : <span class="param-magic-number">0</span>
-                            = <span id="humiditydiscomfort-value"></span>°C
+                            = <span id="outdoors-humiditydiscomfort-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             <span id="humidity-discomfort-value" class="param-humidityDiscomfort"></span>
@@ -122,7 +122,7 @@
                         </p>
                         <!-- 4. Sun Boost -->
                         <code class="formula-line">
-                            <span class="param-R">sunBoost</span> = min(<span class="param-magic-number">3</span>, log(<span class="param-magic-number">1</span> + <span class="param-R">R</span>) × <span class="param-magic-number">0.4</span>) = <span id="sunboost-value"></span>°C
+                            <span class="param-R">sunBoost</span> = min(<span class="param-magic-number">3</span>, log(<span class="param-magic-number">1</span> + <span class="param-R">R</span>) × <span class="param-magic-number">0.4</span>) = <span id="outdoors-sunboost-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             <span id="sun-boost-value"></span>The <code class="param-R">sunBoost</code> models how sunlight increases warmth perception.
@@ -131,7 +131,7 @@
                         </p>
                         <!-- 5. Rain Penalty -->
                         <code class="formula-line">
-                            <span class="param-P">rainPenalty</span> = min(<span class="param-magic-number">1.5</span>, <span class="param-P">P</span> × <span class="param-magic-number">0.3</span>) = <span id="rainpenalty-value"></span>°C
+                            <span class="param-P">rainPenalty</span> = min(<span class="param-magic-number">1.5</span>, <span class="param-P">P</span> × <span class="param-magic-number">0.3</span>) = <span id="outdoors-rainpenalty-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             The <code class="param-P">rainPenalty</code> models the cooling sensation caused by rainfall.
@@ -139,7 +139,7 @@
                         </p>
                         <!-- 6. Wind Chill -->
                         <code class="formula-line">
-                            <span class="param-windChill">windChill</span> = <span class="param-magic-number">13.12</span> + <span class="param-magic-number">0.6215</span> × <span class="param-T">T</span> <code><span class="param-magic-number">− 11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> <code>+ <span class="param-magic-number">0.3965</span> × <span class="param-T">T</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> = <span id="windchill-value"></span>°C
+                            <span class="param-windChill">windChill</span> = <span class="param-magic-number">13.12</span> + <span class="param-magic-number">0.6215</span> × <span class="param-T">T</span> <code><span class="param-magic-number">− 11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> <code>+ <span class="param-magic-number">0.3965</span> × <span class="param-T">T</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> = <span id="outdoors-windchill-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             The <a href="https://en.wikipedia.org/wiki/Wind_chill#North_American_and_United_Kingdom_wind_chill_index" class="formula-link" target="_blank">wind chill formula</a> is the official metric model adopted by multiple national weather agencies following the 2001 update.<br><br>
@@ -153,7 +153,7 @@
                         </p>
                         <!-- 7. Apparent Temperature (AT) -->
                         <code id="at-formula" class="formula-line">
-                            <span class="param-AT">AT</span> (Apparent Temperature) = <span class="param-T">T</span> + <span class="param-magic-number">0.33</span> × <span class="param-e">e</span> <span class="param-magic-number">−0.70</span> × <span class="param-v">v</span> <span class="param-magic-number">−4.00</span> = <span id="at-value"></span>°C
+                            <span class="param-AT">AT</span> (Apparent Temperature) = <span class="param-T">T</span> + <span class="param-magic-number">0.33</span> × <span class="param-e">e</span> <span class="param-magic-number">−0.70</span> × <span class="param-v">v</span> <span class="param-magic-number">−4.00</span> = <span id="outdoors-at-value"></span>°C
                         </code>
                         <br>
                         <p class="formula-explanation">
@@ -165,7 +165,7 @@
                         </p>
                         <!-- 8. FeelsLikeOutdoors -->
                         <code class="formula-line">
-                            FeelsLikeOutdoors = <span class="param-AT">AT</span> + <span class="param-R">sunBoost</span> − <span class="param-P">rainPenalty</span> − <span class="param-dewPenalty">dewPenalty</span> + <span class="param-humidityDiscomfort">humidityDiscomfort</span> = <span id="outdoor-feelslike-value"></span>°C
+                            FeelsLikeOutdoors = <span class="param-AT">AT</span> + <span class="param-R">sunBoost</span> − <span class="param-P">rainPenalty</span> − <span class="param-dewPenalty">dewPenalty</span> + <span class="param-humidityDiscomfort">humidityDiscomfort</span> = <span id="outdoors-feelslike-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             This formula starts with Apparent Temperature and adds a boost from solar radiation. It subtracts cooling from rain and dew point, and adjusts for humidity discomfort, which can either increase or decrease perceived temperature depending on whether the air is too humid or too dry. Wind chill influences the Apparent Temperature indirectly when it's cold and windy.
@@ -173,7 +173,7 @@
                         <p class="params-explanation">
                             The values below are the actual current weather values.
                         </p>
-                        <ul id="outdoor-params"></ul>
+                        <ul id="outdoors-params"></ul>
                     </div>
                 </div>
 
@@ -194,7 +194,7 @@
 
                     <div class="formula-content">
                         <code class="formula-line">
-                            <span class="param-e">e</span> (vapor pressure hPa) = (<span class="param-RH">RH</span> / <span class="param-magic-number">100</span>) × <span class="param-magic-number">6.105</span> × exp((<span class="param-magic-number">17.27</span> × <span class="param-T">T</span>) / (<span class="param-magic-number">237.7</span> + <span class="param-T">T</span>)) = <span id="indoor-vapor-pressure-value"></span> hPa
+                            <span class="param-e">e</span> (vapor pressure hPa) = (<span class="param-RH">RH</span> / <span class="param-magic-number">100</span>) × <span class="param-magic-number">6.105</span> × exp((<span class="param-magic-number">17.27</span> × <span class="param-T">T</span>) / (<span class="param-magic-number">237.7</span> + <span class="param-T">T</span>)) = <span id="indoors-vapor-pressure-value"></span> hPa
                         </code>
                         <br>
                         <p class="formula-explanation">
@@ -207,21 +207,21 @@
                         </p>
                         <!-- 1. Baseline Indoors -->
                         <code class="formula-line">
-                            <span class="param-baselineIndoors">baselineIndoors</span> = <span class="param-T">T</span> + min(<span class="param-magic-number">0.33</span> × <span class="param-e">e</span>, <span class="param-magic-number">4</span>) − <span class="param-magic-number">2</span> = <span id="indoor-baseline-value"></span>°C
+                            <span class="param-baselineIndoors">baselineIndoors</span> = <span class="param-T">T</span> + min(<span class="param-magic-number">0.33</span> × <span class="param-e">e</span>, <span class="param-magic-number">4</span>) − <span class="param-magic-number">2</span> = <span id="indoors-baseline-value"></span>°C
                         </code>
                         <p class="formula-explanation">
-                            Baseline indoors accounts for the raw perceived temperature indoors by accounting for moisture embedded in <span class="param-e">e</span> but not for draft, sunlight, or discomfort.
+                            Baseline indoors accounts for the raw perceived temperature indoors by accounting for moisture which uses <span class="param-e">e</span> but is capped and reduced to simulate an indoor environment.
                         </p>
                         <!-- 2. Indoor Sun Boost -->
                         <code class="formula-line">
-                            <span class="param-R">sunBoost</span> = min(<span class="param-magic-number">2</span>, √<span class="param-R">R</span> × <span class="param-magic-number">0.05</span>) = <span id="indoor-sunboost-value"></span>°C
+                            <span class="param-R">sunBoost</span> = min(<span class="param-magic-number">2</span>, √<span class="param-R">R</span> × <span class="param-magic-number">0.05</span>) = <span id="indoors-sunboost-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             The <code class="param-R">sunBoost</code> models indoor radiant warmth from sunlight through windows. The effect is capped at 2 °C, assuming insulation and indirect exposure.
                         </p>
                         <!-- 3. Indirect Wind Effect -->
                         <code class="formula-line">
-                            <span class="param-indirectWindEffect">indirectWindEffect</span> = <span class="param-v">v</span> × <span class="param-magic-number">0.1</span> = <span id="indoor-wind-effect-value"></span>°C
+                            <span class="param-indirectWindEffect">indirectWindEffect</span> = <span class="param-v">v</span> × <span class="param-magic-number">0.1</span> = <span id="indoors-indirectwindeffect-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             <span class="param-indirectWindEffect">indirectWindEffect</span> accounts for standard ventilation.
@@ -229,14 +229,14 @@
                         <!-- 4. Humidity Discomfort Indoor -->
                         <code class="formula-line">
                             <span class="param-humidityDiscomfort">humidityDiscomfort</span> = RH &lt; 30 ? (30 − RH) × 0.08 : RH &gt; 60 ? (RH − 60) × 0.08 : 0<br>
-                            <span class="param-humidityDiscomfortIndoor"><span class="param-humidityDiscomfortIndoor">humidityDiscomfortIndoor</span></span> = <span class="param-humidityDiscomfort">humidityDiscomfort</span> × 0.5 = <span id="indoor-humiditydiscomfort-value"></span>°C
+                            <span class="param-humidityDiscomfortIndoor"><span class="param-humidityDiscomfortIndoor">humidityDiscomfortIndoor</span></span> = <span class="param-humidityDiscomfort">humidityDiscomfort</span> × 0.5 = <span id="indoors-humiditydiscomfort-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             <span class="param-humidityDiscomfortIndoor"><span class="param-humidityDiscomfortIndoor">humidityDiscomfortIndoor</span></span> adjusts the discomfort effect from humidity by halving the outdoor value. Indoors, the humidity is set to have half the impact.
                         </p>
                         <!-- 5. Dew Point Penalty -->
                         <code class="formula-line">
-                            <span class="param-dewPenalty">dewPointPenalty</span> = max(<span class="param-magic-number">0</span>, <span class="param-D">D</span> − <span class="param-magic-number">16</span>) × <span class="param-magic-number">0.2</span> = <span id="indoor-dewpenalty-value"></span>°C
+                            <span class="param-dewPenalty">dewPointPenalty</span> = max(<span class="param-magic-number">0</span>, <span class="param-D">D</span> − <span class="param-magic-number">16</span>) × <span class="param-magic-number">0.2</span> = <span id="indoors-dewpenalty-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             <span id="dew-penalty-value" class="param-dewPenalty"></span>
@@ -246,7 +246,7 @@
                         </p>
                         <!-- 6. FeelsLikeIndoors -->
                         <code class="formula-line">
-                            FeelsLikeIndoors = <span class="param-baselineIndoors">baselineIndoors</span> − <span class="param-indirectWind">indirectWindEffect</span> + <span class="param-R">sunBoost</span> − <span class="param-dewPenalty">dewPenalty</span> − <span class="param-humidityDiscomfortIndoor">humidityDiscomfortIndoor</span> = <span id="indoor-feelslike-value"></span>°C
+                            FeelsLikeIndoors = <span class="param-baselineIndoors">baselineIndoors</span> + <span class="param-R">sunBoost</span> − <span class="param-indirectWind">indirectWindEffect</span> − <span class="param-dewPenalty">dewPenalty</span> − <span class="param-humidityDiscomfortIndoor">humidityDiscomfortIndoor</span> = <span id="indoors-feelslike-value"></span>°C
                         </code>
                         <br>
                         <p class="formula-explanation">
@@ -255,7 +255,7 @@
                         <p class="params-explanation">
                             The values below are the actual current weather values.
                         </p>
-                        <ul id="indoor-params"></ul>
+                        <ul id="indoors-params"></ul>
                     </div>
                 </div>
 

@@ -38,14 +38,14 @@ export function computeFeelsLike({
 
 	// Indoor
 	const baselineIndoors = T + Math.min(0.33 * vaporPressure, 4) - 2;
-	const sunBoostIndoor = Math.min(2, Math.sqrt(R) * 0.05);
+	const sunBoostIndoors = Math.min(2, Math.sqrt(R) * 0.05);
 	const insulationFactor = 0.02;
 	const indirectWindEffect = v * insulationFactor;
 	const humidityDiscomfortIndoor = humidityDiscomfort * 0.5;
 
 	const feelsLikeIndoors = baselineIndoors
+		+ sunBoostIndoors
 		- indirectWindEffect
-		+ sunBoostIndoor
 		- dewPenalty
 		- humidityDiscomfortIndoor;
 
@@ -61,14 +61,15 @@ export function computeFeelsLike({
 		dewPenalty,
 		humidityDiscomfort,
 		windChill,
-
+		
 		sunBoostOutdoor,
 		rainPenaltyOutdoor,
-
-		sunBoostIndoor,
-		baselineIndoors,
-
 		feelsLikeOutdoors,
+
+		sunBoostIndoors,
+		indirectWindEffect,
+		baselineIndoors,
 		feelsLikeIndoors,
+
 	};
 }
