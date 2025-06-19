@@ -47,12 +47,14 @@ document.querySelectorAll('.formula-box').forEach((box) => {
 });
 setInterval(async () => {
     const newWeatherInfo = await getWeatherInfo(location);
-    if (newWeatherInfo.temperatureC !== weatherInfo.temperatureC ||
+    if (newWeatherInfo.temperatureC !== undefined &&
+        newWeatherInfo.temperatureC !== weatherInfo.temperatureC ||
         newWeatherInfo.relativeHumidity !== weatherInfo.relativeHumidity ||
         newWeatherInfo.windSpeedMps !== weatherInfo.windSpeedMps ||
         newWeatherInfo.solarRadiation !== weatherInfo.solarRadiation ||
         newWeatherInfo.precipitationMmPerHr !== weatherInfo.precipitationMmPerHr) {
     
+        weatherInfo = newWeatherInfo;
         updateWeatherDisplay();
 
     }
