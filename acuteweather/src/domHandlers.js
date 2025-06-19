@@ -48,6 +48,7 @@ function displayFeelsLikeFormulas(feelsLike) {
         ["T", feelsLike.T, "← air temperature (°C)"],
 		["RH", feelsLike.RH, "← relative humidity (%)"],
 		["R", feelsLike.R.toFixed(1), "← solar radiation (W/m²)"],
+		["v", feelsLike.v.toFixed(2), "← wind speed (m/s)"],
 		["D", feelsLike.D.toFixed(1), "← dew point (°C)"],
 
 	].forEach(([label, actual, explanation]) => {
