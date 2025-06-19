@@ -65,12 +65,11 @@ function displayFeelsLikeFormulas(feelsLike) {
 	
     // Update all new formula value spans
     document.getElementById("outdoors-vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);
-    document.getElementById("outdoors-at-value").textContent = (feelsLike.T + 0.33 * feelsLike.vaporPressure - 0.70 * feelsLike.v).toFixed(2);
+    document.getElementById("outdoors-at-value").textContent = feelsLike.apparentTemperatureOutdoors.toFixed(2);
     document.getElementById("outdoors-sunboost-value").textContent = feelsLike.sunBoostOutdoor.toFixed(2);
     document.getElementById("outdoors-rainpenalty-value").textContent = feelsLike.rainPenaltyOutdoor.toFixed(2);
     document.getElementById("outdoors-dewpenalty-value").textContent = feelsLike.dewPenalty.toFixed(2);
     document.getElementById("outdoors-humiditydiscomfort-value").textContent = feelsLike.humidityDiscomfort.toFixed(2);
-    document.getElementById("outdoors-windchill-value").textContent = feelsLike.windChill.toFixed(2);
     document.getElementById("outdoors-feelslike-value").textContent = feelsLike.feelsLikeOutdoors.toFixed(4);
 
 	document.getElementById("indoors-vapor-pressure-value").textContent = feelsLike.vaporPressure.toFixed(2);

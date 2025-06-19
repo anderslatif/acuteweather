@@ -22,21 +22,18 @@ export function computeFeelsLike({
 	// Outdoor
 	const sunBoostOutdoor = Math.min(3, Math.log(1 + R) * 0.4);
 	const rainPenaltyOutdoor = Math.min(1.5, P * 0.3);
-	const useWindChill = (T <= 10 && v >= 1.3);
-	const windChill = useWindChill
-		? 13.12 + 0.6215 * T - 11.37 * Math.pow(v, 0.16) + 0.3965 * T * Math.pow(v, 0.16)
-		: T;
 	const apparentTemperatureOutdoors = T
 		+ 0.33 * vaporPressure
 		- 0.7 * v
 		- 4;
 	const feelsLikeOutdoors = apparentTemperatureOutdoors
 		+ sunBoostOutdoor
-		- (T - windChill)
 		- rainPenaltyOutdoor
 		- dewPenalty
 		+ humidityDiscomfort;
 
+	console.log(apparentTemperatureOutdoors)
+		
 	// Indoor
 	const baselineIndoors = T + Math.min(0.33 * vaporPressure, 4) - 2;
 	const sunBoostIndoors = Math.min(2, Math.sqrt(R) * 0.05);
@@ -61,10 +58,10 @@ export function computeFeelsLike({
 		vaporPressure,
 		dewPenalty,
 		humidityDiscomfort,
-		windChill,
 		
 		sunBoostOutdoor,
 		rainPenaltyOutdoor,
+		apparentTemperatureOutdoors,
 		feelsLikeOutdoors,
 
 		sunBoostIndoors,

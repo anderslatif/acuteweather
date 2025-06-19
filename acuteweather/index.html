@@ -136,29 +136,9 @@
                             The <code class="param-P">rainPenalty</code> models the cooling sensation caused by rainfall.
                             <code><span class="param-P">P</span> × <span class="param-magic-number">0.3</span></code> increases the penalty linearly with precipitation rate, capped at 1.5 °C to reflect saturation - once you're soaked, heavier rain doesn't make it feel much colder.
                         </p>
-                        <!-- 6. Wind Chill -->
-                        <code class="formula-line">
-                            <span class="param-useWindChill">useWindChill</span> = (T ≤ 10 °C and v ≥ 1.3 m/s)
-                        </code>
-                        <p class="formula-explanation">
-                            Wind chill is only considered if the air temperature is 10 °C or below and wind speed is at least 1.3 m/s.
-                        </p>
-                        <code class="formula-line">
-                            <span class="param-windChill">windChill</span> = <span class="param-useWindChill">useWindChill</span> ? 13.12 + 0.6215 × T − 11.37 × v<sup>0.16</sup> + 0.3965 × T × v<sup>0.16</sup> : T = <span id="outdoors-windchill-value"></span>°C
-                        </code>
-                        <p class="formula-explanation">
-                            The <a href="https://en.wikipedia.org/wiki/Wind_chill#North_American_and_United_Kingdom_wind_chill_index" class="formula-link" target="_blank">wind chill formula</a> is the official metric model adopted by multiple national weather agencies following the 2001 update.<br><br>
-                            Wind chill is only defined for cold and windy conditions (≤ 10 °C and ≥ 1.3 m/s). Otherwise it is set to 0.<br><br>
-                            The constant <code class="param-magic-number">13.12</code> is a baseline starting point.
-                            The term <code><span class="param-magic-number">0.6215</span> × <span class="param-T">T</span></code> represents direct warming from the actual air temperature.
-                            The subtraction term <code><span class="param-magic-number">− 11.37</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> models cooling from wind speed alone.<br>
-                            The final term <code>+ <span class="param-magic-number">0.3965</span> × <span class="param-T">T</span> × <span class="param-v">v</span><sup><span class="param-magic-number">0.16</span></sup></code> adjusts that cooling effect based on how temperature interacts with wind speed.
-                            <br><br>
-                            The result estimates how much colder it feels on exposed skin compared to the actual temperature.
-                        </p>
-                        <!-- 7. Apparent Temperature (AT) -->
+                        <!-- 6. Apparent Temperature (AT) -->
                         <code id="at-formula" class="formula-line">
-                            <span class="param-AT">AT</span> (Apparent Temperature) = <span class="param-T">T</span> + <span class="param-magic-number">0.33</span> × <span class="param-e">e</span> <span class="param-magic-number">−0.70</span> × <span class="param-v">v</span> <span class="param-magic-number">−4.00</span> = <span id="outdoors-at-value"></span>°C
+                            <span class="param-AT">AT</span> (Apparent Temperature) = <span class="param-T">T</span> + <span class="param-magic-number">0.33</span> × <span class="param-e">e</span> <span class="param-magic-number">− 0.70</span> × <span class="param-v">v</span> <span class="param-magic-number">− 4.00</span> = <span id="outdoors-at-value"></span>°C
                         </code>
                         <br>
                         <p class="formula-explanation">
@@ -168,9 +148,9 @@
                             <code><span class="param-magic-number">−0.70</span> × <span class="param-v">v</span></code> subtracts cooling from wind and
                             <code><span class="param-magic-number">−4.00</span></code> is a constant calibration offset.
                         </p>
-                        <!-- 8. FeelsLikeOutdoors -->
+                        <!-- 7. FeelsLikeOutdoors -->
                         <code class="formula-line">
-                            FeelsLikeOutdoors = <span class="param-AT">AT</span> + <span class="param-R">sunBoost</span> − (<span class="param-T">T</span> − <span class="param-windChill">windChill</span>) − <span class="param-P">rainPenalty</span> − <span class="param-dewPenalty">dewPenalty</span> + <span class="param-humidityDiscomfort">humidityDiscomfort</span> = <span id="outdoors-feelslike-value"></span>°C
+                            FeelsLikeOutdoors = <span class="param-AT">AT</span> + <span class="param-R">sunBoost</span> − <span class="param-P">rainPenalty</span> − <span class="param-dewPenalty">dewPenalty</span> + <span class="param-humidityDiscomfort">humidityDiscomfort</span> = <span id="outdoors-feelslike-value"></span>°C
                         </code>
                         <p class="formula-explanation">
                             This formula starts with Apparent Temperature and adds a boost from solar radiation. It subtracts cooling from rain and dew point, and adjusts for humidity discomfort, which can either increase or decrease perceived temperature depending on whether the air is too humid or too dry. Wind chill influences the Apparent Temperature indirectly when it's cold and windy.
