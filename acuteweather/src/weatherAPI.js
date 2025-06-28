@@ -24,7 +24,7 @@ export async function getWeatherInfo({ latitude, longitude }) {
     }
 
 	const data = await response.json();
-	const i = getCurrentHourIndex(data.hourly.time);
+	const i = getCurrentHourIndexBasedOnLocationCoordinates(data.hourly.time);
 
 	return {
         ...data,
@@ -37,8 +37,19 @@ export async function getWeatherInfo({ latitude, longitude }) {
 	};
 }
 
-function getCurrentHourIndex(hourlyTimestamps) {
-	const now = new Date();
-	const currentHour = now.toISOString().slice(0, 13); // "YYYY-MM-DDTHH"
-	return hourlyTimestamps.findIndex(t => t.startsWith(currentHour));
+function getCurrentHourIndexBasedOnLocationCoordinates(hourlyTimestamps, timezone) {
+	const date = new Date();
+
+	const fmt = new Intl.DateTimeFormat("default", {
+		timeZone: timezone,
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+		hour: "2-digit",
+		hour12: false
+	});
+
+	const parts = Object.fromEntries(fmt.formatToParts(date).map((part) => [part.type, part.value]));
+	const localHour = `${parts.year}-${parts.month}-${parts.day}T${parts.hour}`;
+	return hourlyTimestamps.findIndex((time) => time.slice(0, 13) === localHour);
 }
